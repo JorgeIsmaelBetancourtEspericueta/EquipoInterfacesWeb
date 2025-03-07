@@ -1,0 +1,93 @@
+/* Estilos para el botón que abre el modal */
+.open-modal-btn {
+  background-color: #fe9e0d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 50%; /* Hace que el botón ocupe casi todo el ancho */
+  transition: background-color 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.open-modal-btn:hover {
+  background-color: #e48f0f;
+}
+
+/* Overlay del modal con mayor opacidad para reducir transparencia */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2); /* Más opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.modal-content {
+  background-color: #fff !important; /* Fondo blanco forzado */
+  color: #000 !important; /* Texto negro forzado */
+  padding: 20px;
+  border-radius: 30px !important;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.modal-text {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #000; /* Aseguramos el texto en negro */
+}
+
+/* Botón para cerrar el modal: se iguala al color del botón de abrir */
+.close-modal-btn {
+  background-color: #fe9e0d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  background-color: #e48f0f;
+}
+
+@media (max-width: 768px) {
+  .open-modal-btn {
+    width: 100%; /* Ocupar todo el ancho disponible */
+    max-width: 300px; /* Evitar que sea demasiado grande */
+    text-align: center;
+    display: block;
+    margin: 10px auto; /* Centrar el botón */
+  }
+
+  .modal-content {
+    width: 90%; /* Hacer que el modal se ajuste mejor en móviles */
+    max-width: 400px;
+    padding: 15px;
+  }
+
+  .close-modal-btn {
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 10px auto;
+  }
+}

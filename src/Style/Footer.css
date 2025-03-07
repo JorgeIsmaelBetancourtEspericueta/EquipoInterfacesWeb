@@ -1,0 +1,171 @@
+.footer-wrapper {
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+}
+
+.footer-section-one,
+.footer-section-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Asegurar que ocupa todo el ancho */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+  background-color: transparent; /* Asegurar que las secciones internas también sean transparentes */
+}
+
+.footer-section-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center; /* Centrar elementos en cada columna */
+}
+
+.footer-link {
+  color: #fff; /* Color blanco para mejor contraste */
+  text-decoration: none; /* Sin subrayado */
+  padding: 10px 15px; /* Espaciado alrededor del enlace */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #fe9e0d; /* Fondo ligero para destacar el enlace */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Transición suave */
+  font-weight: 500; /* Peso de fuente más fuerte */
+  width: 100%;
+}
+
+/* Efecto hover para los enlaces */
+.footer-link:hover {
+  color: #e48f0f; /* Color de resaltado */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fondo ligeramente más oscuro en hover */
+  transform: translateY(-2px); /* Efecto de levantamiento */
+}
+
+/* Estilos responsivos */
+@media (max-width: 1024px) {
+  .footer-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centrar en ambas direcciones */
+    text-align: center;
+  }
+
+  .footer-section-one,
+  .footer-section-two {
+    flex-direction: column; /* Forzar disposición en columna */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px; /* Espaciado uniforme */
+  }
+
+  .footer-section-columns {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-link {
+    width: 100%;
+    max-width: 300px; /* Mantener los botones con el mismo tamaño */
+  }
+}
+
+/* Ajuste adicional para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .footer-wrapper {
+    padding: 15px; /* Reducir padding en móviles */
+  }
+
+  .footer-section-one,
+  .footer-section-two {
+    gap: 10px;
+  }
+
+  .footer-link {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 1024px) {
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .footer-section-one,
+  .footer-section-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .footer-section-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-link {
+    width: 90%; /* Ajuste dinámico */
+    max-width: 300px; /* Mantener un tamaño uniforme */
+    text-align: center;
+  }
+}
+@media (max-width: 1024px) {
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    gap: 20px; /* Espacio entre elementos */
+  }
+
+  .footer-section-one,
+  .footer-section-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .footer-section-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .footer-link {
+    width: 100%; /* Asegurar que ocupan todo el ancho disponible */
+    max-width: 300px; /* Limitar el tamaño máximo */
+    text-align: center;
+  }
+}

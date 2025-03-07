@@ -1,0 +1,13 @@
+//Para instalar Tailwindcss en un proyectpo de vite, se usan los siguientes comandos:
+//  1. npm install -D tailwindcss postcss autoprefixer
+//  2. npx tailwindcss init -p
+//En el archivo llamado tailwind.config.js que se genero, vamos a cambiar el objeto content por el siguiente:
+//  content: ["./index.html", "./src/**/*,{js,ts,jsx,tsx}"],
+//Si se quiere se puede instalar la extension de tailwind en VS code eso para que nos ayude con el autocompletado
+//Por ultimo el en archivo index.css se agregan las siguientes clases
+//  @tailwind base;
+//  @tailwind components
+//  @tailwind utilities
+
+//Instalamos "npm install react-hook-form para manejar los eventos de los formularios y validarlos
+//Instalamos axios en el lado del cliente, osea en el back "npm i axios", lo cual nos ayudara para hacer las peticiones al backend en lugar de usar fetch
