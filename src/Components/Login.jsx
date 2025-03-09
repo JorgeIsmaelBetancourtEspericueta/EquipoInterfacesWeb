@@ -1,12 +1,10 @@
 import { useEffect } from "react";
-import {useForm} from 'react-hook-form';//Importamos esto para hacer algunas validaciones
+import { useForm } from "react-hook-form"; //Importamos esto para hacer algunas validaciones
 import "../Login.css";
 import { registerRequest } from "../api/auth.js";
 
-
 export default function Login() {
-
-  const {register, handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     const container = document.getElementById("container");
@@ -47,16 +45,29 @@ export default function Login() {
         </div>
 
         <div className="form-container sign-up">
-          <form onSubmit={
-              handleSubmit(async (values) =>{
-                console.log(values);
-                const res = await registerRequest(values);
-                console.log(res);
-            })}>
+          <form
+            onSubmit={handleSubmit(async (values) => {
+              console.log(values);
+              const res = await registerRequest(values);
+              console.log(res);
+            })}
+          >
             <h1>Crear Cuenta</h1>
-            <input type="text" {...register("username", {required:true})} placeholder="Nombre" />
-            <input type="email" {...register('email', {required:true})} placeholder="Correo Electrónico" />
-            <input type="password" {...register('password', {required:true})} placeholder="Contraseña" />
+            <input
+              type="text"
+              {...register("username", { required: true })}
+              placeholder="Nombre"
+            />
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Correo Electrónico"
+            />
+            <input
+              type="password"
+              {...register("password", { required: true })}
+              placeholder="Contraseña"
+            />
             <button type="submit">Registrarse</button>
           </form>
         </div>
@@ -66,12 +77,16 @@ export default function Login() {
             <div className="toggle-panel toggle-left">
               <h1>¡Bienvenido de nuevo!</h1>
               <p>Si ya tienes una cuenta, inicia sesión aquí.</p>
-              <button class="hidden"  id="login">Iniciar Sesión</button>
+              <button class="hidden" id="login">
+                Iniciar Sesión
+              </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>¡Hola, bienvenid@!</h1>
               <p>Regístrate para acceder a todas las funciones del sitio.</p>
-              <button class="hidden"  id="register">Registrarse</button>
+              <button class="hidden" id="register">
+                Registrarse
+              </button>
             </div>
           </div>
         </div>

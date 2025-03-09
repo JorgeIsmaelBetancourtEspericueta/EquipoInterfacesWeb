@@ -5,14 +5,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../Style/CarouselStyles.css";
 import bandera from "../Assets/ubicacion.png";
 
-<img
-  height="40px"
-  width="40px"
-  src={bandera}
-  alt="Ubicación"
-  className="icon"
-/>;
-
 function Carousel() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -103,6 +95,15 @@ function Carousel() {
         <div className="row">
           {/* Descripción */}
           <div className="col-md-6 description text-start">
+            {/* Imagen circular encima de la descripción */}
+            <div className="image-container mb-3">
+              <img
+                src="https://ugc.production.linktr.ee/ff7ea8a2-f0b1-488e-9ed2-5d386b05290d_274540928-5789644191060245-5250761642601889327-n.jpeg"
+                alt="Imagen del lugar"
+                className="img-fluid rounded-circle"
+                style={{ width: "150px", height: "150px", objectFit: "cover" }}
+              />
+            </div>
             <h3>Descripción</h3>
             <div className="user-info">
               <div className="row">
@@ -176,18 +177,18 @@ function Carousel() {
                               key={i}
                               src={
                                 i < c.rating
-                                  ? "https://img.icons8.com/ios-filled/50/FFD700/star.png" // Estrella llena
-                                  : "https://img.icons8.com/ios/50/000000/star.png" // Estrella vacía
+                                  ? "https://img.icons8.com/ios-filled/50/FFD700/star.png"
+                                  : "https://img.icons8.com/ios/50/000000/star.png"
                               }
                               alt="Star"
                               className="star-icon"
-                              style={{ width: "20px", height: "20px" }} // Asegurando que las estrellas tengan un tamaño fijo
+                              style={{ width: "20px", height: "20px" }}
                             />
                           ))}
                         </div>
                         {/* Foto del usuario a la derecha */}
                         <img
-                          src="https://www.w3schools.com/w3images/avatar2.png" // Imagen falsa de usuario
+                          src="https://www.w3schools.com/w3images/avatar2.png"
                           alt="Usuario"
                           className="user-photo"
                           style={{
