@@ -250,3 +250,23 @@ h5 {
   transform: scale(1.1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+
+.custom-menu-button {
+  background-color: #fff !important; /* Color naranja */
+  color: black !important;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-menu-button:hover {
+  background-color: #e68900; /* Oscurece en hover */
+  border-color: #d67700;
+  transform: scale(1.05); /* Efecto de crecimiento */
+}
+
+.favorites-container {
+  max-height: 300px; /* Altura máxima del área de favoritos */
+  overflow-y: auto; /* Agrega scroll cuando haya muchos elementos */
+  border: 1px solid #ccc; /* Opcional: para dar un borde al área */
+  padding: 10px; /* Espaciado interno */
+}

@@ -153,21 +153,21 @@ function Carousel() {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary mt-3">Ver Menú</button>
+            <button className="btn btn-primary mt-3 custom-menu-button">
+              Ver Menú
+            </button>
           </div>
           {/* Sección de comentarios */}
           <div className="col-md-6 comments text-start">
             <h3>Comentarios</h3>
-            <div className="comments-container">
+            <div className="favorites-container">
               <ul className="list-group">
                 {comments.length === 0 ? (
                   <li className="list-group-item">No hay comentarios aún.</li>
                 ) : (
                   comments.map((c, index) => (
                     <li key={index} className="list-group-item comment-item">
-                      {/* Contenedor de estrellas y foto en la misma línea */}
                       <div className="d-flex align-items-center">
-                        {/* Contenedor de estrellas */}
                         <div
                           className="stars-container d-flex"
                           style={{ marginRight: "10px" }}
@@ -186,7 +186,6 @@ function Carousel() {
                             />
                           ))}
                         </div>
-                        {/* Foto del usuario a la derecha */}
                         <img
                           src="https://www.w3schools.com/w3images/avatar2.png"
                           alt="Usuario"
@@ -198,7 +197,6 @@ function Carousel() {
                           }}
                         />
                       </div>
-                      {/* Texto del comentario debajo de las estrellas y foto */}
                       <div
                         className="comment-text mt-2"
                         style={{ marginLeft: "50px" }}

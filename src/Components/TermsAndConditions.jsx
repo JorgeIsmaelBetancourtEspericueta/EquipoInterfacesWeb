@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "../Style/Modal.css"; // Importar el archivo CSS para los estilos
 
 const TermsAndConditionsModal = () => {
@@ -24,7 +24,7 @@ const TermsAndConditionsModal = () => {
               que la información que proporcionas es veraz y bien intencionada
               Nos reservamos el derecho de modificar estos términos en cualquier
               momento, por lo que te recomendamos revisar esta sección
-              periódicamente. 
+              periódicamente.
             </p>
             <p className="modal-text">
               Nos reservamos el derecho de modificar estos términos en cualquier
