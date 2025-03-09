@@ -1,7 +1,15 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Style/ProfileEditor.css"; // Importar el archivo CSS
-import { Person, Email, Phone, School } from "@mui/icons-material"; // Importar los íconos de MUI
+import "../Style/ProfileEditor.css";
+import {
+  Person,
+  Email,
+  Phone,
+  School,
+  Favorite,
+  Restaurant,
+} from "@mui/icons-material";
+import { Link } from "react-router-dom"; // Asegúrate de tener react-router-dom instalado
 
 export default function ProfileEditor() {
   const [profile, setProfile] = useState({
@@ -12,6 +20,7 @@ export default function ProfileEditor() {
     career: "",
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const careers = [
     "Arquitectura",
@@ -47,102 +56,133 @@ export default function ProfileEditor() {
 
   return (
     <div
-      className="container mt-5 d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh", position: "relative", padding: 0 }}
+      className="container-fluid mt-5 d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}
     >
-      {/* Contenedor del formulario */}
-      <div className="card profile-card">
-        <div className="card-body">
-          <div className="mb-3 position-relative">
-            <img
-              src={profile.photo || "https://via.placeholder.com/150"}
-              alt="Foto de perfil"
-              className="rounded-circle profile-photo"
-            />
-            {isEditing && (
-              <input
-                type="file"
-                accept="image/*"
-                className="form-control mt-2"
-                onChange={handlePhotoChange}
-              />
-            )}
-          </div>
+      <div
+        className="card profile-card w-75 p-4"
+        style={{ maxWidth: "1200px" }}
+      >
+        <div className="row">
+          {/* Sección de información del usuario */}
+          <div className="col-md-8">
+            <div className="card-body">
+              <div className="mb-3 position-relative text-center">
+                <img
+                  src={profile.photo || "https://via.placeholder.com/150"}
+                  alt="Foto de perfil"
+                  className="rounded-circle profile-photo"
+                />
+                {isEditing && (
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="form-control mt-2"
+                    onChange={handlePhotoChange}
+                  />
+                )}
+              </div>
 
-          {/* Fila de formulario con 2 columnas */}
-          <div className="row mb-3">
-            <div className="col-12 col-md-6 d-flex align-items-center">
-              <label className="col-form-label text-white me-2">
-                <Person /> {/* Ícono de Persona */}
-              </label>
-              <input
-                type="text"
-                className="form-control profile-input"
-                name="name"
-                value={profile.name}
-                onChange={handleChange}
-                disabled={!isEditing}
-              />
-            </div>
+              <div className="row mb-3">
+                {/* Columna 1: Nombre y Correo */}
+                <div className="col-12 col-md-6 d-flex align-items-center">
+                  <label className="col-form-label text-white me-2">
+                    <Person />
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control profile-input"
+                    name="name"
+                    value={profile.name}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
+                </div>
+                <div className="col-12 col-md-6 d-flex align-items-center">
+                  <label className="col-form-label text-white me-2">
+                    <Email />
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control profile-input"
+                    name="email"
+                    value={profile.email}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
+                </div>
+              </div>
 
-            <div className="col-12 col-md-6 d-flex align-items-center">
-              <label className="col-form-label text-white me-2">
-                <Phone /> {/* Ícono de Teléfono */}
-              </label>
-              <input
-                type="text"
-                className="form-control profile-input"
-                name="phone"
-                value={profile.phone}
-                onChange={handleChange}
-                disabled={!isEditing}
-              />
-            </div>
-          </div>
+              <div className="row mb-3">
+                {/* Columna 2: Teléfono y Carrera */}
+                <div className="col-12 col-md-6 d-flex align-items-center">
+                  <label className="col-form-label text-white me-2">
+                    <Phone />
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control profile-input"
+                    name="phone"
+                    value={profile.phone}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
+                </div>
+                <div className="col-12 col-md-6 d-flex align-items-center">
+                  <label className="col-form-label text-white me-2">
+                    <School />
+                  </label>
+                  <select
+                    className="form-select profile-input"
+                    name="career"
+                    value={profile.career}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  >
+                    <option value="">Seleccione una carrera</option>
+                    {careers.map((career, index) => (
+                      <option key={index} value={career}>
+                        {career}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-          {/* Fila de formulario con 2 columnas */}
-          <div className="row mb-3">
-            <div className="col-12 col-md-6 d-flex align-items-center">
-              <label className="col-form-label text-white me-2">
-                <Email /> {/* Ícono de Correo */}
-              </label>
-              <input
-                type="email"
-                className="form-control profile-input"
-                name="email"
-                value={profile.email}
-                onChange={handleChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="col-12 col-md-6 d-flex align-items-center">
-              <label className="col-form-label text-white me-2">
-                <School /> {/* Ícono de Carrera */}
-              </label>
-              <select
-                className="form-select profile-input"
-                name="career"
-                value={profile.career}
-                onChange={handleChange}
-                disabled={!isEditing}
+              <button
+                className="btn profile-btn w-auto"
+                onClick={() => setIsEditing(!isEditing)}
               >
-                <option value="">Seleccione una carrera</option>
-                {careers.map((career, index) => (
-                  <option key={index} value={career}>
-                    {career}
-                  </option>
-                ))}
-              </select>
+                {isEditing ? "Guardar" : "Editar"}
+              </button>
             </div>
           </div>
 
-          <button
-            className="btn profile-btn w-100"
-            onClick={() => setIsEditing(!isEditing)}
-          >
-            {isEditing ? "Guardar" : "Editar"}
-          </button>
+          {/* Sección de Mis Favoritos */}
+          <div className="col-md-4 border-start">
+            <div className="card-body d-flex flex-column justify-content-center align-items-center">
+              <h5 className="text-center text-white mb-3">
+                <Favorite className="me-2" /> Mis Favoritos
+              </h5>
+              {favorites.length === 0 ? (
+                <div className="text-center text-white d-flex flex-column justify-content-center align-items-center">
+                  <Restaurant className="fs-1 mb-3" />
+                  <p>No hay lugares cargados</p>
+                  <Link to="/explorar" className="btn btn-link text-white">
+                    Explorar lugares
+                  </Link>
+                </div>
+              ) : (
+                <ul className="list-group">
+                  {favorites.map((fav, index) => (
+                    <li key={index} className="list-group-item">
+                      {fav}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
