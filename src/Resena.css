@@ -1,90 +1,220 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+.resena-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 100px; /* Ajusta el espacio superior si tienes un navbar fijo */
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2; /* Asegura que el buscador quede por encima de otros elementos */
+}
+
+.search-bar input {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+}
+
+.search-bar .search-icon {
+  font-size: 20px;
+  color: #888;
+  margin-left: -30px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+/* Estilos de los botones de filtro */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #fe9e0d;
+  color: white;
+}
+
+.filter-buttons button.active {
+  background-color: #fe9e0d;
+  color: white;
+}
+
+/* Estilos del botón "Añadir Nuevo Lugar" */
+.add-new-place-btn {
+  background-color: #ce7c02;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 30px;
+  display: block;
+  margin: 20px auto;
+}
+
+.add-new-place-btn:hover {
+  background-color: rgba(255, 153, 0, 0.747);
+}
+
+/* Estilos de las cartas */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+/* Estilos generales de la tarjeta */
+/* Estilos generales de la tarjeta */
+.card {
+  background: linear-gradient(145deg, #ff9d00, #ffbb55); /* Degradado naranja */
+  border-radius: 20px; /* Bordes redondeados pero no circulares */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: rotate(5deg); /* Giro leve de las cartas para darles una forma dinámica */
+}
+
+/* Efecto al pasar el mouse sobre la carta */
+.card:hover {
+  transform: translateY(-10px) rotate(0deg); /* Elimina el giro y eleva la carta */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Estilo para la imagen de la carta */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px; /* Bordes redondeados para la imagen */
+  transition: transform 0.5s ease;
+}
+
+/* Efecto de zoom en la imagen */
+.card:hover .card-image {
+  transform: scale(1.05); /* Hace un zoom sobre la imagen */
+}
+
+/* Título de la carta */
+.card-title {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white; /* Texto blanco para contraste */
+  transition: color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el título */
+.card:hover .card-title {
+  color: #fff; /* Mantén el color blanco */
+}
+
+/* Descripción de la carta */
+.card-description {
+  font-size: 14px;
+  color: #f2f2f2;
+  margin: 10px 0;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre la descripción */
+.card:hover .card-description {
+  color: #e0e0e0;
+}
+
+/* Botones y acciones dentro de la tarjeta */
+.card-actions {
+  display: flex;
+  justify-content: space-between; /* Esto asegura que el corazón esté a la izquierda y el botón a la derecha */
+  align-items: center; /* Esto asegura que ambos estén alineados verticalmente */
+}
+
+/* Ícono de me gusta */
+.like-icon {
+  font-size: 24px;
+  color: #ccc; /* Corazón por defecto en gris */
+  cursor: pointer;
+  margin-right: 15px; /* Espacio entre el corazón y el botón */
+}
+
+/* Ícono de me gusta al estar marcado */
+.like-icon.liked .heart-icon {
+  color: #ff4848; /* Naranja cuando se hace "me gusta" */
+}
+
+/* Botón "Ver más" */
+.view-more-btn {
+  background-color: #fe9e0d;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover en el botón "Ver más" */
+.view-more-btn:hover {
+  background-color: rgba(255, 153, 0, 0.8);
+  transform: translateY(-2px); /* Elevación ligera del botón */
+}
+
+/* Efecto hover en el ícono del corazón */
+.like-icon:hover {
+  color: #fe0d0d;
+  transform: scale(1.2); /* Aumenta el tamaño del corazón al pasar el mouse */
+}
+
+/* Estilos de la carta activa (cuando está seleccionada) */
+.card.active {
+  border: 2px solid #fe9e0d; /* Borde naranja alrededor de la carta */
+  box-shadow: 0 8px 16px rgba(255, 153, 0, 0.5); /* Sombra con el color naranja */
+}
+
+/* Animación del título */
+@keyframes titleAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .resena-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-top: 100px; /* Ajusta el espacio superior si tienes un navbar fijo */
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Barra de búsqueda */
-  .search-bar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 2; /* Asegura que el buscador quede por encima de otros elementos */
-  }
-  
-  .search-bar input {
-    padding: 10px;
-    font-size: 16px;
-    width: 250px;
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    outline: none;
-  }
-  
-  .search-bar .search-icon {
-    font-size: 20px;
-    color: #888;
-    margin-left: -30px;
-    margin-top: 5px;
-    cursor: pointer;
-  }
-  
-  /* Estilos de las cartas */
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .card-title {
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .card-description {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
-  }
-  
-  .view-more-btn {
-    background-color: #fe9e0d;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .view-more-btn:hover {
-    background-color: rgba(255, 153, 0, 0.747);
-  }
+}
+
+.card-title {
+  animation: titleAnimation 0.5s ease-out forwards;
+}
