@@ -63,10 +63,17 @@
   cursor: pointer;
   margin-top: 10px;
   transition: background-color 0.3s ease;
+  width: auto !important; /* Evita que se expanda */
+  max-width: none !important; /* Anula cualquier limitación */
+  padding: 10px 20px;
+  display: inline-block; /* Evita que se expanda en bloque */
+  margin: 10px auto;
+  text-align: center;
 }
 
 .close-modal-btn:hover {
   background-color: #e48f0f;
+  width: auto !important;
 }
 
 @media (max-width: 768px) {
@@ -85,8 +92,7 @@
   }
 
   .close-modal-btn {
-    width: 100%;
-    max-width: 200px;
+    width: auto !important;
     display: block;
     margin: 10px auto;
   }

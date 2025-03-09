@@ -25,7 +25,6 @@ function App() {
               <Work />
               <About />
               <Testimonial />
-              <Contact />
               <Footer />
             </>
           }
