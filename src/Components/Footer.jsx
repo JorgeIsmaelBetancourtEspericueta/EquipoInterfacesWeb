@@ -14,14 +14,29 @@ const Footer = () => {
           </div>
           {/* Columna central: Enlaces */}
           <div className="col-md-4 text-center footer-section-columns">
-            <a href="https://www.tepic.tecnm.mx/" className="footer-link mx-2">
+            <a
+              href="https://www.tepic.tecnm.mx/"
+              className="footer-link mx-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               ITTepic
             </a>
-            <a href="#about" className="footer-link mx-2">
-              Misión
+            <a
+              href="https://sii.tepic.tecnm.mx/sistema/"
+              className="footer-link mx-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              SII
             </a>
-            <a href="#contacto" className="footer-link mx-2">
-              Contáctanos
+            <a
+              href="https://nexo.tepic.tecnm.mx/"
+              className="footer-link mx-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NEXO
             </a>
           </div>
           {/* Columna derecha: Modales */}

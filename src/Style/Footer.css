@@ -28,26 +28,16 @@
 }
 
 .footer-link {
-  color: #fff; /* Color blanco para mejor contraste */
-  text-decoration: none; /* Sin subrayado */
-  padding: 10px 15px; /* Espaciado alrededor del enlace */
-  border-radius: 4px; /* Bordes redondeados */
-  background-color: #fe9e0d; /* Fondo ligero para destacar el enlace */
-  transition: color 0.3s ease, background-color 0.3s ease; /* Transición suave */
-  font-weight: 500; /* Peso de fuente más fuerte */
-  width: 100%;
+  color: #4d4d4d; /* Gris claro para mejor visibilidad */
+  text-decoration: none; /* Sin subrayado por defecto */
+  font-weight: 500; /* Resalta un poco el texto */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Suavidad en la animación */
+  display: inline-block; /* Mantiene alineación sin parecer botón */
 }
 
-/* Efecto hover para los enlaces */
 .footer-link:hover {
-  color: #e48f0f; /* Color de resaltado */
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-  ); /* Fondo ligeramente más oscuro en hover */
-  transform: translateY(-2px); /* Efecto de levantamiento */
+  color: #fe9e0d; /* Color anaranjado vibrante en hover */
+  text-decoration: underline; /* Subrayado sutil */
 }
 
 /* Estilos responsivos */

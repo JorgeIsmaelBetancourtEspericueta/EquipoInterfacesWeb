@@ -1,19 +1,18 @@
 /* Estilos para el botón que abre el modal */
 .open-modal-btn {
-  background-color: #fe9e0d;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
+  background: none; /* Sin fondo */
+  color: #4d4d4d; /* Gris claro para buen contraste */
+  padding: 0; /* Sin padding para que no parezca botón */
+  border: none; /* Sin bordes */
   cursor: pointer;
-  margin-top: 10px;
-  width: 50%; /* Hace que el botón ocupe casi todo el ancho */
-  transition: background-color 0.3s ease;
-  font-size: 0.8rem;
+  font-size: 1rem; /* Tamaño de fuente adecuado */
+  text-decoration: none; /* Sin subrayado por defecto */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Efecto suave */
 }
 
 .open-modal-btn:hover {
-  background-color: #e48f0f;
+  color: #fe9e0d; /* Naranja vibrante en hover */
+  text-decoration: underline; /* Subrayado sutil */
 }
 
 /* Overlay del modal con mayor opacidad para reducir transparencia */
