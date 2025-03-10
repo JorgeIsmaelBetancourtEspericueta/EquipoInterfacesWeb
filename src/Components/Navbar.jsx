@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../Assets/Logo.svg";
 import { HiOutlineBars3 } from "react-icons/hi2";
@@ -19,12 +19,20 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const location = useLocation();
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  // Actualizar el estado cuando cambia el hash
+  useEffect(() => {
+    const updateHash = () => setCurrentHash(window.location.hash);
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
 
   const menuOptions = [
     { text: "Home", icon: <HomeIcon />, link: "/" },
     { text: "Misión", icon: <InfoIcon />, link: "#about" },
     { text: "Reseñas", icon: <CommentRoundedIcon />, link: "/resena" },
-    { text: "Contactános", icon: <PhoneRoundedIcon />, link: "#contacto" },
+    { text: "Contáctanos", icon: <PhoneRoundedIcon />, link: "#contacto" },
   ];
 
   return (
@@ -33,27 +41,31 @@ const Navbar = () => {
         <img src={Logo} alt="Logo" />
       </div>
       <div className="navbar-links-container">
-        <Link to="/" className={location.pathname === "/" ? "active-link" : ""}>
-          Home
-        </Link>
-        <a
-          href="/#about"
-          className={location.hash === "#about" ? "active-link" : ""}
-        >
-          Misión
-        </a>
-        <Link
-          to="/resena"
-          className={location.pathname === "/resena" ? "active-link" : ""}
-        >
-          Reseñas
-        </Link>
-        <a
-          href="/#contacto"
-          className={location.hash === "#contacto" ? "active-link" : ""}
-        >
-          Contactános
-        </a>
+        {menuOptions.map((item) =>
+          item.text !== "Misión" && item.text !== "Contáctanos" ? (
+            item.link.startsWith("#") ? (
+              <a
+                key={item.text}
+                href={item.link}
+                className={currentHash === item.link ? "active-link" : ""}
+              >
+                {item.text}
+              </a>
+            ) : (
+              <Link
+                key={item.text}
+                to={item.link}
+                className={location.pathname === item.link ? "active-link" : ""}
+              >
+                {item.text}
+              </Link>
+            )
+          ) : (
+            <a key={item.text} href={item.link}>
+              {item.text}
+            </a>
+          )
+        )}
         <Link
           to="/login"
           className={location.pathname === "/login" ? "active-link" : ""}
@@ -74,13 +86,15 @@ const Navbar = () => {
             {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
                 <ListItemButton
-                  component={item.link.includes("#") ? "a" : Link}
-                  href={item.link.includes("#") ? item.link : undefined}
-                  to={item.link.includes("#") ? undefined : item.link}
+                  component={item.link.startsWith("#") ? "a" : Link}
+                  href={item.link.startsWith("#") ? item.link : undefined}
+                  to={item.link.startsWith("#") ? undefined : item.link}
                   onClick={() => setOpenMenu(false)}
                   className={
-                    location.pathname === item.link ||
-                    location.hash === item.link
+                    (location.pathname === item.link ||
+                      currentHash === item.link) &&
+                    item.text !== "Misión" &&
+                    item.text !== "Contáctanos"
                       ? "active-link"
                       : ""
                   }
