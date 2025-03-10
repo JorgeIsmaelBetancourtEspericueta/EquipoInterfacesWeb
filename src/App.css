@@ -62,7 +62,7 @@ nav {
 }
 .primary-button {
   padding: 0.9rem 1.75rem;
-  background-color: white;
+  background-color: #fe9e0d;
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -70,12 +70,13 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
+  color: white;
 }
 .navbar-cart-icon {
   font-size: 1.15rem;
 }
 .primary-button:hover {
-  background-color: rgb(234, 234, 234);
+  background-color: #e48f0f;
 }
 .navbar-menu-container svg {
   font-size: 1.5rem;

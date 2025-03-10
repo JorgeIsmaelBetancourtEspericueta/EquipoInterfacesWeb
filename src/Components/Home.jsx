@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import BannerBackground from "../Assets/home-banner-background.png";
 import BannerImage from "../Assets/home-banner-image.png";
 import Navbar from "./Navbar";
@@ -5,6 +6,8 @@ import { FiArrowRight } from "react-icons/fi";
 import { GiTigerHead } from "react-icons/gi";
 
 const Home = () => {
+  const navigate = useNavigate(); // Hook para navegación
+
   return (
     <div className="home-container">
       <Navbar />
@@ -22,8 +25,11 @@ const Home = () => {
             de comida dentro y alrededor del Instituto Tecnológico de Tepic.
             ¡Evita sorpresas y elige siempre lo mejor!"
           </p>
-          <button className="secondary-button">
-            Explorar Lugares<FiArrowRight />{" "}
+          <button
+            className="secondary-button"
+            onClick={() => navigate("/resena")}
+          >
+            Explorar Lugares <FiArrowRight />
           </button>
         </div>
         <div className="home-image-section">
