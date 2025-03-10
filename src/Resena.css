@@ -12,58 +12,95 @@ body {
   padding-top: 100px; /* Ajusta el espacio superior si tienes un navbar fijo */
 }
 
-/* Barra de búsqueda */
+/* Barra de búsqueda estilo menú de restaurante */
 .search-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start; /* Alineamos a la izquierda, como en los menús de restaurantes */
   margin-bottom: 30px;
   position: relative;
-  z-index: 2; /* Asegura que el buscador quede por encima de otros elementos */
+  z-index: 2;
 }
 
 .search-bar input {
-  padding: 10px;
-  font-size: 16px;
-  width: 250px;
-  border: 2px solid #ccc;
-  border-radius: 25px;
+  padding: 12px 25px;
+  font-size: 18px;
+  width: 280px;
+  border: 2px solid #fe9e0d; /* Borde naranja, el color base */
+  border-radius: 50px; /* Bordes completamente redondeados */
   outline: none;
+  background-color: #f3f3f3; /* Color de fondo suave */
+  font-family: 'Roboto', sans-serif; /* Fuente más sencilla, fácil de leer */
+  color: #333; /* Color del texto */
+  transition: all 0.3s ease, width 0.5s ease;
+  margin-left: 900px;
+}
+
+.search-bar input:focus {
+  border-color: #d76c3e; /* Un tono más oscuro al enfocar */
+  box-shadow: 0 0 10px rgba(255, 153, 0, 0.7); /* Sombra suave al enfocar */
+  width: 320px; /* Expande la barra de búsqueda al hacer foco */
 }
 
 .search-bar .search-icon {
-  font-size: 20px;
+  font-size: 22px;
   color: #888;
-  margin-left: -30px;
-  margin-top: 5px;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%); /* Centrado verticalmente */
   cursor: pointer;
+  transition: color 0.3s ease; /* Transición suave para el cambio de color */
 }
+
+.search-bar input:focus + .search-icon {
+  color: #fe9e0d; /* Cambiar color del icono de lupa cuando el input está enfocado */
+}
+
+.search-bar .search-icon:hover {
+  color: #d76c3e; /* Color del ícono al pasar el mouse */
+}
+
+/* Estilos adicionales para los botones de búsqueda */
+.search-bar input::placeholder {
+  color: #888;
+  font-style: italic; /* Agrega un toque más elegante al placeholder */
+}
+
+
 
 /* Estilos de los botones de filtro */
 .filter-buttons {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .filter-buttons button {
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 10px 15px;
-  margin: 0 10px;
+  background-color: #fe9e0d; /* Base naranja */
+  border: none;
+  border-radius: 30px; /* Bordes redondeados */
+  padding: 12px 25px;
+  margin: 0 12px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase; /* Mayúsculas para un toque elegante */
+  transition: all 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
 }
 
 .filter-buttons button:hover {
-  background-color: #fe9e0d;
-  color: white;
+  background-color: #d76c3e; /* Un tono más oscuro de naranja */
+  transform: translateY(-3px); /* Efecto de elevación */
+}
+
+.filter-buttons button:active {
+  transform: translateY(2px); /* Efecto de presionado */
 }
 
 .filter-buttons button.active {
-  background-color: #fe9e0d;
-  color: white;
+  background-color: #d76c3e; /* Color más oscuro cuando está activo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el botón activo */
 }
 
 /* Estilos del botón "Añadir Nuevo Lugar" */
