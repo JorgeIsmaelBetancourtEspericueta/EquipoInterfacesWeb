@@ -17,13 +17,13 @@ const Home = () => {
         </div>
         <div className="home-text-section">
           <h1 className="primary-heading">
-            "Descubre los Mejores Lugares para Comer en el Tec de Tepic"{" "}
+            Descubre los Mejores Lugares para Comer en el Tec de Tepic
             <GiTigerHead />
           </h1>
           <p className="primary-text">
-            "Encuentra, califica y recomienda los mejores restaurantes y puestos
+            Encuentra, califica y recomienda los mejores restaurantes y puestos
             de comida dentro y alrededor del Instituto Tecnológico de Tepic.
-            ¡Evita sorpresas y elige siempre lo mejor!"
+            ¡Evita sorpresas y elige siempre lo mejor!
           </p>
           <button
             className="secondary-button"

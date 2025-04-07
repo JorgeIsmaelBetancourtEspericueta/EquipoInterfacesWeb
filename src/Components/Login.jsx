@@ -77,14 +77,14 @@ export default function Login() {
             <div className="toggle-panel toggle-left">
               <h1>¡Bienvenido de nuevo!</h1>
               <p>Si ya tienes una cuenta, inicia sesión aquí.</p>
-              <button class="hidden" id="login">
+              <button className="hidden" id="login">
                 Iniciar Sesión
               </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>¡Hola, bienvenid@!</h1>
               <p>Regístrate para acceder a todas las funciones del sitio.</p>
-              <button class="hidden" id="register">
+              <button className="hidden" id="register">
                 Registrarse
               </button>
             </div>
