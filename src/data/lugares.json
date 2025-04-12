@@ -2,50 +2,103 @@
   {
     "id": 1,
     "title": "Kiosko",
-    "description": "Un café con gran ambiente y excelente café.",
-    "image": "/public/images/kiosko.webp",
-    "category": "Local"
+    "image": "../../public/images/kiosko/kiosko.webp",
+    "description": "Comedor doña paz, la mejor comida con el sazón de mamá.",
+    "address": "Frente al salón audiovisual",
+    "hours": "9:00 AM - 8:00 PM",
+    "phone": "+52 38910020025",
+    "rating": 4.2,
+    "category": "Local",
+    "carrusel": [
+      "../../public/images/duritosYael/duritosYael.jpg",
+      "../../public/images/duritosYael/duritosYael.jpg"
+    ]
   },
   {
     "id": 2,
     "title": "Cafetería",
-    "description": "Emprendimiento innovador del sector tecnológico.",
-    "image": "/public/images/cafeteria.webp",
-    "category": "Local"
+    "image": "../../public/images/cafeteria/cafeteria.webp",
+    "description": "La cafetería más moderna y con la mejor comida",
+    "address": "Frente al edificio LIIA",
+    "hours": "8:00 AM - 8:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 4.8,
+    "menuUrl": "#",
+    "category": "Local",
+    "carrusel": [
+      "../../public/images/cafeteria/imagencafe1.jpg",
+      "../../public/images/cafeteria/cafeteria2.webp",
+      "../../public/images/cafeteria/cafeteria3.webp"
+    ]
   },
   {
     "id": 3,
     "title": "Dulces José Luis",
-    "description": "Gran variedad de productos y dulces a un precio económico",
-    "image": "/public/images/dulcesJoseLuis.jpg",
-    "category": "Emprendedores"
+    "image": "../../public/images/dulcesJoseLuis/dulcesJoseLuis.jpg",
+    "description": "Gran variedad de productos y dulces a un precio económico.",
+    "address": "Laboratorio de cómputo",
+    "hours": "8:00 AM - 6:00 PM",
+    "phone": "+52 3111354678",
+    "rating": 5.0,
+    "menuUrl": "#",
+    "category": "Emprendedores",
+    "carrusel": [
+      "../../public/images/dulcesJoseLuis/cajadulces.jpg",
+      "../../public/images/dulcesJoseLuis/duritos de anillito.jpg",
+      "../../public/images/dulcesJoseLuis/palomitas.avif"
+    ]
   },
   {
     "id": 4,
     "title": "Duritos Yael",
-    "description": "Los mejores duritos del Tec, a solo $10",
-    "image": "/public/images/duritosYael.jpg",
-    "category": "Emprendedores"
+    "image": "../../public/images/duritosYael/duritosYael.jpg",
+    "description": "Los mejores duritos del Tec, a solo $10.",
+    "address": "Escobedo 199",
+    "hours": "9:00 AM - 5:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 5.0,
+    "category": "Emprendedores",
+    "carrusel": ["../../public/images/duritosYael/duritosYael.jpg"]
   },
   {
     "id": 5,
     "title": "El Pechugón",
-    "description": "El mejor pollo rostizado de la región",
-    "image": "/public/images/elpechugon.png",
+    "image": "../../public/images/elpechugon/elpechugon.png",
+    "description": "El mejor pollo rostizado de la región.",
+    "address": "63175, Francisco Villa 143, 2 de Agosto, Tepic, Nay.",
+    "hours": "9:00 AM - 4:00 PM",
+    "phone": "+52 +523111059081",
+    "rating": 4.6,
+    "menuUrl": "#",
     "category": "Externo"
   },
   {
     "id": 6,
     "title": "Restaurante El Milagro",
-    "description": "Antojitos Mexicanos con el mejor sabor",
-    "image": "/public/images/restauranteElMilagro.png",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/f0/91/2f/el-quincho.jpg?w=600&h=-1&s=1",
+    "description": "Antojitos Mexicanos con el mejor sabor.",
+    "address": "Escobedo 199",
+    "hours": "9:00 AM - 8:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 4.7,
+    "menuUrl": "#",
     "category": "Externo"
   },
   {
     "id": 7,
     "title": "El Pollo Feliz Express",
+    "image": "../../public/images/pollofeliz/polloFeliz.png",
     "description": "Orgullosamente mexicanos, con más de 1000 sucursales.",
-    "image": "/public/images/polloFeliz.png",
-    "category": "Externo"
+    "address": "Escobedo 199",
+    "hours": "9:00 AM - 8:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 4.4,
+    "menuUrl": "#",
+    "category": "Externo",
+    "carrusel": [
+      "../../public/images/pollofeliz/pollofeliz1.png",
+      "../../public/images/pollofeliz/pollofeliz2.png",
+      "../../public/images/pollofeliz/pollofeliz3.png"
+    ]
   }
 ]

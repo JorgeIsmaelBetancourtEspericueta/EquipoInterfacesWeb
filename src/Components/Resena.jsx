@@ -140,7 +140,7 @@ export default function Resena() {
               >
                 <FaHeart className="heart-icon" />
               </div>
-              <Link to="/Carrusel">
+              <Link to={`/Carrusel/${card.id}`}>
                 <button className="view-more-btn">Ver más</button>
               </Link>
             </div>
