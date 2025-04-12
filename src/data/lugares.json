@@ -58,7 +58,11 @@
     "phone": "+52 3891083922",
     "rating": 5.0,
     "category": "Emprendedores",
-    "carrusel": ["../../public/images/duritosYael/duritosYael.jpg"]
+    "carrusel": [
+      "../../public/images/duritosYael/duritos1.jpg",
+      "../../public/images/duritosYael/duritos2.jpg",
+      "../../public/images/duritosYael/duritos3.jpg"
+    ]
   },
   {
     "id": 5,
@@ -70,27 +74,36 @@
     "phone": "+52 +523111059081",
     "rating": 4.6,
     "menuUrl": "#",
-    "category": "Externo"
+    "category": "Externo",
+    "carrusel": [
+      "../../public/images/elpechugon/elpechugon1.png",
+      "../../public/images/elpechugon/elpechugon2.png",
+      "../../public/images/elpechugon/elpechugon3.png"
+    ]
   },
   {
     "id": 6,
-    "title": "Restaurante El Milagro",
-    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/f0/91/2f/el-quincho.jpg?w=600&h=-1&s=1",
+    "title": "Ñam Ñam",
+    "image": "../../public/images/ñanñan/nannan.png",
     "description": "Antojitos Mexicanos con el mejor sabor.",
-    "address": "Escobedo 199",
-    "hours": "9:00 AM - 8:00 PM",
-    "phone": "+52 3891083922",
-    "rating": 4.7,
-    "menuUrl": "#",
-    "category": "Externo"
+    "address": "Genaro Vázquez 142, 2 de Agosto, 63175 Tepic, Nay.",
+    "hours": "7:00 AM - 4:00 PM",
+    "phone": "No registrado",
+    "rating": 4.9,
+    "category": "Externo",
+    "carrusel": [
+      "../../public/images/ñanñan/nannan1.png",
+      "../../public/images/ñanñan/nannan2.png",
+      "../../public/images/ñanñan/nannan3.png"
+    ]
   },
   {
     "id": 7,
     "title": "El Pollo Feliz Express",
     "image": "../../public/images/pollofeliz/polloFeliz.png",
     "description": "Orgullosamente mexicanos, con más de 1000 sucursales.",
-    "address": "Escobedo 199",
-    "hours": "9:00 AM - 8:00 PM",
+    "address": "Pueblo En Lucha 129A, 2 de Agosto, 63175",
+    "hours": "10:30 AM - 6:00 PM",
     "phone": "+52 3891083922",
     "rating": 4.4,
     "menuUrl": "#",
