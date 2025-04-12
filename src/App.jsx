@@ -30,7 +30,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/resena" element={<Resena />} />
+        <Route path="/Resena/:category?" element={<Resena />} />
         <Route path="/profileEditor" element={<ProfileEditor />} />
         <Route path="/Carrusel" element={<Carrusel />} />{" "}
         {/* Cambiado de component a element */}

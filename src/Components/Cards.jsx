@@ -1,4 +1,3 @@
-import React from 'react';
 import '../App.css'; // Importa el archivo CSS
 import loma42 from '../Assets/loma_42.jpg';
 import cafeTec from '../Assets/CafeteriaTec.jpg';

@@ -1,23 +1,38 @@
-import { useState } from "react";
-import { FaSearch, FaHeart } from "react-icons/fa"; 
+import { useState, useEffect } from "react";
+import { FaSearch, FaHeart } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom"; // ← import useParams
 import "../Resena.css";
-import { Link } from "react-router-dom";
+import lugaresData from "../data/lugares.json";
 
 export default function Resena() {
+  const { category } = useParams(); // ← obtener categoría desde URL
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("Todas");
   const [showModal, setShowModal] = useState(false);
-  const [newPlace, setNewPlace] = useState({
-    title: "",
-  });
+  const [newPlace, setNewPlace] = useState({ title: "" });
   const [likedCards, setLikedCards] = useState({});
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    setCards(lugaresData);
+  }, []);
+
+  useEffect(() => {
+    // Validar y aplicar categoría desde la URL
+    if (category && ["Emprendedores", "Local", "Externo"].includes(category)) {
+      setFilter(category);
+    } else {
+      setFilter("Todas");
+    }
+  }, [category]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleFilterChange = (category) => {
-    setFilter(category);
+  const handleFilterChange = (cat) => {
+    setFilter(cat);
   };
 
   const handleModalToggle = () => {
@@ -33,8 +48,16 @@ export default function Resena() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Nuevo lugar:", newPlace);
-    setShowModal(false); // Cerrar la ventana después de enviar
+    const nuevo = {
+      id: cards.length + 1,
+      title: newPlace.title,
+      description: "Descripción por defecto.",
+      image: "https://via.placeholder.com/150",
+      category: "Local",
+    };
+    setCards([...cards, nuevo]);
+    setNewPlace({ title: "" });
+    setShowModal(false);
   };
 
   const toggleLike = (id) => {
@@ -43,30 +66,6 @@ export default function Resena() {
       [id]: !prev[id],
     }));
   };
-
-  const cards = [
-    {
-      id: 1,
-      title: "Título de la Carta 1",
-      description: "Una pequeña descripción de la carta. Lorem ipsum dolor sit amet.",
-      image: "https://via.placeholder.com/150",
-      category: "Local",
-    },
-    {
-      id: 2,
-      title: "Título de la Carta 2",
-      description: "Otra descripción pequeña de la carta. Con detalles breves.",
-      image: "https://via.placeholder.com/150",
-      category: "Externo",
-    },
-    {
-      id: 3,
-      title: "Título de la Carta 3",
-      description: "Más detalles sobre esta carta. Un poco más de información.",
-      image: "https://via.placeholder.com/150",
-      category: "Emprendedores",
-    },
-  ];
 
   const filteredCards = cards
     .filter((card) =>
@@ -87,19 +86,21 @@ export default function Resena() {
       </div>
 
       <div className="filter-buttons">
-        <button className={filter === "Emprendedores" ? "active" : ""} onClick={() => handleFilterChange("Emprendedores")}>
-          Emprendedores
-        </button>
-        <button className={filter === "Local" ? "active" : ""} onClick={() => handleFilterChange("Local")}>Local</button>
-        <button className={filter === "Externo" ? "active" : ""} onClick={() => handleFilterChange("Externo")}>Externo</button>
-        <button className={filter === "Todas" ? "active" : ""} onClick={() => handleFilterChange("Todas")}>Todas</button>
+        {["Emprendedores", "Local", "Externo", "Todas"].map((cat) => (
+          <button
+            key={cat}
+            className={filter === cat ? "active" : ""}
+            onClick={() => handleFilterChange(cat)}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       <button className="add-new-place-btn" onClick={handleModalToggle}>
         Añadir Nuevo Lugar
       </button>
 
-      {/* Modal para agregar un nuevo lugar con solo un campo */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -118,7 +119,9 @@ export default function Resena() {
                 />
               </div>
               <button type="submit">Agregar</button>
-              <button type="button" onClick={handleModalToggle}>Cerrar</button>
+              <button type="button" onClick={handleModalToggle}>
+                Cerrar
+              </button>
             </form>
           </div>
         </div>
@@ -130,20 +133,17 @@ export default function Resena() {
             <img src={card.image} alt={card.title} className="card-image" />
             <h3 className="card-title">{card.title}</h3>
             <p className="card-description">{card.description}</p>
-
             <div className="card-actions">
-  <div
-    className={`like-icon ${likedCards[card.id] ? "liked" : ""}`}
-    onClick={() => toggleLike(card.id)}
-  >
-    <FaHeart className="heart-icon" />
-  </div>
-  <Link to="/Carrusel">
-    <button className="view-more-btn">Ver más</button>
-  </Link>
-</div>
-
-
+              <div
+                className={`like-icon ${likedCards[card.id] ? "liked" : ""}`}
+                onClick={() => toggleLike(card.id)}
+              >
+                <FaHeart className="heart-icon" />
+              </div>
+              <Link to="/Carrusel">
+                <button className="view-more-btn">Ver más</button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

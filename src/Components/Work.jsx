@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom"; // Importa Link
 import LogoIttepic from "../Assets/logoIttepic.png";
 import estudiante from "../Assets/estudiante.png";
@@ -10,19 +9,19 @@ const Work = () => {
       image: LogoIttepic,
       title: "Comida en el ITTepic",
       text: "Descubre las opciones de comida dentro del campus con establecimientos confiables y accesibles.",
-      link: "/Carrusel",
+      link: "/Resena/Local",
     },
     {
       image: estudiante,
       title: "Emprendimientos Estudiantiles",
       text: "Prueba los platillos y snacks preparados por nuestros estudiantes emprendedores. ¡Apóyalos!",
-      link: "https://example.com/choose-meals",
+      link: "/Resena/Emprendedores",
     },
     {
       image: puesto,
       title: "Opciones Cercanas",
       text: "¿Quieres algo diferente? Explora restaurantes y puestos de comida cerca del Tec.",
-      link: "https://example.com/fast-deliveries",
+      link: "/Resena/Externo",
     },
   ];
 
@@ -39,47 +38,24 @@ const Work = () => {
         </p>
       </div>
       <div className="work-section-bottom">
-        {workInfoData.map((data) =>
-          data.title === "Comida en el ITTepic" ? (
-            <Link
-              to={data.link} // Cambia 'href' por 'to' para la navegación interna
-              className="work-section-info"
-              key={data.title}
-              style={{ textDecoration: "none", color: "inherit" }} // Mantiene el estilo
-            >
-              <div className="info-boxes-img-container">
-                <img
-                  src={data.image}
-                  alt={data.title}
-                  className="w-[150px] h-[150px] object-cover"
-                />
-              </div>
-
-              <h2>{data.title}</h2>
-              <p>{data.text}</p>
-            </Link>
-          ) : (
-            <a
-              href={data.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="work-section-info"
-              key={data.title}
-              style={{ textDecoration: "none", color: "inherit" }} // Mantiene el estilo
-            >
-              <div className="info-boxes-img-container">
-                <img
-                  src={data.image}
-                  alt={data.title}
-                  className="w-[150px] h-[150px] object-cover"
-                />
-              </div>
-
-              <h2>{data.title}</h2>
-              <p>{data.text}</p>
-            </a>
-          )
-        )}
+        {workInfoData.map((data) => (
+          <Link
+            to={data.link}
+            className="work-section-info"
+            key={data.title}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="info-boxes-img-container">
+              <img
+                src={data.image}
+                alt={data.title}
+                className="w-[150px] h-[150px] object-cover"
+              />
+            </div>
+            <h2>{data.title}</h2>
+            <p>{data.text}</p>
+          </Link>
+        ))}
       </div>
     </div>
   );
