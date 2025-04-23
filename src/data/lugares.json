@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Kiosko",
-    "image": "../../public/images/kiosko/kiosko.webp",
+    "image": "/images/kiosko/kiosko.webp",
     "description": "Comedor doña paz, la mejor comida con el sazón de mamá.",
     "address": "Frente al salón audiovisual",
     "hours": "9:00 AM - 8:00 PM",
@@ -10,14 +10,14 @@
     "rating": 4.2,
     "category": "Local",
     "carrusel": [
-      "../../public/images/duritosYael/duritosYael.jpg",
-      "../../public/images/duritosYael/duritosYael.jpg"
+      "/images/duritosYael/duritosYael.jpg",
+      "/images/duritosYael/duritosYael.jpg"
     ]
   },
   {
     "id": 2,
     "title": "Cafetería",
-    "image": "../../public/images/cafeteria/cafeteria.webp",
+    "image": "/images/cafeteria/cafeteria.webp",
     "description": "La cafetería más moderna y con la mejor comida",
     "address": "Frente al edificio LIIA",
     "hours": "8:00 AM - 8:00 PM",
@@ -26,15 +26,15 @@
     "menuUrl": "#",
     "category": "Local",
     "carrusel": [
-      "../../public/images/cafeteria/imagencafe1.jpg",
-      "../../public/images/cafeteria/cafeteria2.webp",
-      "../../public/images/cafeteria/cafeteria3.webp"
+      "/images/cafeteria/imagencafe1.jpg",
+      "/images/cafeteria/cafeteria2.webp",
+      "/images/cafeteria/cafeteria3.webp"
     ]
   },
   {
     "id": 3,
     "title": "Dulces José Luis",
-    "image": "../../public/images/dulcesJoseLuis/dulcesJoseLuis.jpg",
+    "image": "/images/dulcesJoseLuis/dulcesJoseLuis.jpg",
     "description": "Gran variedad de productos y dulces a un precio económico.",
     "address": "Laboratorio de cómputo",
     "hours": "8:00 AM - 6:00 PM",
@@ -43,15 +43,15 @@
     "menuUrl": "#",
     "category": "Emprendedores",
     "carrusel": [
-      "../../public/images/dulcesJoseLuis/cajadulces.jpg",
-      "../../public/images/dulcesJoseLuis/duritos de anillito.jpg",
-      "../../public/images/dulcesJoseLuis/palomitas.avif"
+      "/images/dulcesJoseLuis/cajadulces.jpg",
+      "/images/dulcesJoseLuis/duritos de anillito.jpg",
+      "/images/dulcesJoseLuis/palomitas.avif"
     ]
   },
   {
     "id": 4,
     "title": "Duritos Yael",
-    "image": "../../public/images/duritosYael/duritosYael.jpg",
+    "image": "/images/duritosYael/duritosYael.jpg",
     "description": "Los mejores duritos del Tec, a solo $10.",
     "address": "Escobedo 199",
     "hours": "9:00 AM - 5:00 PM",
@@ -59,15 +59,15 @@
     "rating": 5.0,
     "category": "Emprendedores",
     "carrusel": [
-      "../../public/images/duritosYael/duritos1.jpg",
-      "../../public/images/duritosYael/duritos2.jpg",
-      "../../public/images/duritosYael/duritos3.jpg"
+      "/images/duritosYael/duritos1.jpg",
+      "/images/duritosYael/duritos2.jpg",
+      "/images/duritosYael/duritos3.jpg"
     ]
   },
   {
     "id": 5,
     "title": "El Pechugón",
-    "image": "../../public/images/elpechugon/elpechugon.png",
+    "image": "/images/elpechugon/elpechugon.png",
     "description": "El mejor pollo rostizado de la región.",
     "address": "63175, Francisco Villa 143, 2 de Agosto, Tepic, Nay.",
     "hours": "9:00 AM - 4:00 PM",
@@ -76,15 +76,15 @@
     "menuUrl": "#",
     "category": "Externo",
     "carrusel": [
-      "../../public/images/elpechugon/elpechugon1.png",
-      "../../public/images/elpechugon/elpechugon2.png",
-      "../../public/images/elpechugon/elpechugon3.png"
+      "/images/elpechugon/elpechugon1.png",
+      "/images/elpechugon/elpechugon2.png",
+      "/images/elpechugon/elpechugon3.png"
     ]
   },
   {
     "id": 6,
     "title": "Ñam Ñam",
-    "image": "../../public/images/ñanñan/nannan.png",
+    "image": "/images/ñanñan/nannan.png",
     "description": "Antojitos Mexicanos con el mejor sabor.",
     "address": "Genaro Vázquez 142, 2 de Agosto, 63175 Tepic, Nay.",
     "hours": "7:00 AM - 4:00 PM",
@@ -92,15 +92,15 @@
     "rating": 4.9,
     "category": "Externo",
     "carrusel": [
-      "../../public/images/ñanñan/nannan1.png",
-      "../../public/images/ñanñan/nannan2.png",
-      "../../public/images/ñanñan/nannan3.png"
+      "/images/ñanñan/nannan1.png",
+      "/images/ñanñan/nannan2.png",
+      "/images/ñanñan/nannan3.png"
     ]
   },
   {
     "id": 7,
     "title": "El Pollo Feliz Express",
-    "image": "../../public/images/pollofeliz/polloFeliz.png",
+    "image": "/images/pollofeliz/polloFeliz.png",
     "description": "Orgullosamente mexicanos, con más de 1000 sucursales.",
     "address": "Pueblo En Lucha 129A, 2 de Agosto, 63175",
     "hours": "10:30 AM - 6:00 PM",
@@ -109,9 +109,9 @@
     "menuUrl": "#",
     "category": "Externo",
     "carrusel": [
-      "../../public/images/pollofeliz/pollofeliz1.png",
-      "../../public/images/pollofeliz/pollofeliz2.png",
-      "../../public/images/pollofeliz/pollofeliz3.png"
+      "/images/pollofeliz/pollofeliz1.png",
+      "/images/pollofeliz/pollofeliz2.png",
+      "/images/pollofeliz/pollofeliz3.png"
     ]
   }
 ]
