@@ -79,7 +79,7 @@
 }
 
 /* Estilo del contenedor principal */
-.container {
+.profile-editor .container {
   background-color: transparent; /* Fondo completamente transparente */
   min-height: 100vh; /* Mantiene la altura completa de la pantalla */
   border: none; /* Elimina cualquier borde */

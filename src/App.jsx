@@ -28,10 +28,10 @@ function App() {
             </>
           }
         />
-        <Route path="/login" element={<Login />} />
         <Route path="/Resena/:category?" element={<Resena />} />
         <Route path="/profileEditor" element={<ProfileEditor />} />
         <Route path="/Carrusel/:id" element={<Carrusel />} />
+        <Route path="/login" element={<Login />} />
         {/* Cambiado de component a element */}
       </Routes>
     </Router>

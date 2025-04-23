@@ -9,7 +9,7 @@ import {
   Favorite,
   Restaurant,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom"; // Asegúrate de tener react-router-dom instalado
+import { Link } from "react-router-dom";
 
 export default function ProfileEditor() {
   const [profile, setProfile] = useState({
@@ -54,6 +54,14 @@ export default function ProfileEditor() {
     }
   };
 
+  const handleEditToggle = () => {
+    if (isEditing) {
+      // Aquí podrías agregar lógica para guardar en base de datos
+      console.log("Perfil guardado:", profile);
+    }
+    setIsEditing(!isEditing);
+  };
+
   return (
     <div
       className="container-fluid mt-5 d-flex justify-content-center align-items-center"
@@ -64,7 +72,7 @@ export default function ProfileEditor() {
         style={{ maxWidth: "1200px" }}
       >
         <div className="row">
-          {/* Sección de información del usuario */}
+          {/* Sección de Información del Usuario */}
           <div className="col-md-8">
             <div className="card-body">
               <div className="mb-3 position-relative text-center">
@@ -84,7 +92,6 @@ export default function ProfileEditor() {
               </div>
 
               <div className="row mb-3">
-                {/* Columna 1: Nombre y Correo */}
                 <div className="col-12 col-md-6 d-flex align-items-center">
                   <label className="col-form-label text-white me-2">
                     <Person />
@@ -98,6 +105,7 @@ export default function ProfileEditor() {
                     disabled={!isEditing}
                   />
                 </div>
+
                 <div className="col-12 col-md-6 d-flex align-items-center">
                   <label className="col-form-label text-white me-2">
                     <Email />
@@ -114,7 +122,6 @@ export default function ProfileEditor() {
               </div>
 
               <div className="row mb-3">
-                {/* Columna 2: Teléfono y Carrera */}
                 <div className="col-12 col-md-6 d-flex align-items-center">
                   <label className="col-form-label text-white me-2">
                     <Phone />
@@ -128,6 +135,7 @@ export default function ProfileEditor() {
                     disabled={!isEditing}
                   />
                 </div>
+
                 <div className="col-12 col-md-6 d-flex align-items-center">
                   <label className="col-form-label text-white me-2">
                     <School />
@@ -151,21 +159,22 @@ export default function ProfileEditor() {
 
               <button
                 className="btn profile-btn w-auto"
-                onClick={() => setIsEditing(!isEditing)}
+                onClick={handleEditToggle}
               >
                 {isEditing ? "Guardar" : "Editar"}
               </button>
             </div>
           </div>
 
-          {/* Sección de Mis Favoritos */}
+          {/* Sección de Favoritos */}
           <div className="col-md-4 border-start">
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
               <h5 className="text-center text-white mb-3">
                 <Favorite className="me-2" /> Mis Favoritos
               </h5>
+
               {favorites.length === 0 ? (
-                <div className="text-center text-white d-flex flex-column justify-content-center align-items-center">
+                <div className="text-center text-white">
                   <Restaurant className="fs-1 mb-3" />
                   <p>No hay lugares cargados</p>
                   <Link to="/explorar" className="btn btn-link text-white">
@@ -173,7 +182,7 @@ export default function ProfileEditor() {
                   </Link>
                 </div>
               ) : (
-                <ul className="list-group">
+                <ul className="list-group w-100">
                   {favorites.map((fav, index) => (
                     <li key={index} className="list-group-item">
                       {fav}
