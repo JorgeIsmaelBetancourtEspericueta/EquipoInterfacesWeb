@@ -113,5 +113,56 @@
       "/images/pollofeliz/pollofeliz2.png",
       "/images/pollofeliz/pollofeliz3.png"
     ]
+  },
+  {
+    "id": 8,
+    "title": "El Arguende",
+    "image": "/images/Arguende/Arguende.jpg",
+    "description": "Deliciosa comida casera, muy buen servicio y todo a precios muy economicos.",
+    "address": "Av. Lagos del Country 35, Lagos del Country, 63175 Tepic, Nay.",
+    "hours": "7:30 a.m.–5:30 p.m.",
+    "phone": "+523111625710",
+    "rating": 4.4,
+    "menuUrl": "#",
+    "category": "Externo",
+    "carrusel": [
+      "/images/Arguende/Arguende1.jpg",
+      "/images/Arguende/Arguende2.jpg",
+      "/images/Arguende/Arguende3.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Restaurant Vegetariano Quetzalcoatl",
+    "image": "/images/Quetzalcoatl/Quetzalcoatl.jpg",
+    "description": "Orgullosamente mexicanos, con más de 1000 sucursales.",
+    "address": "Pueblo En Lucha 129A, 2 de Agosto, 63175",
+    "hours": "10:30 AM - 6:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 4.4,
+    "menuUrl": "#",
+    "category": "Externo",
+    "carrusel": [
+      "/images/Quetzalcoatl/Quetzalcoatl1.jpg",
+      "/images/Quetzalcoatl/Quetzalcoatl2.jpg",
+      "/images/Quetzalcoatl/Quetzalcoatl3.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Picnic",
+    "image": "/images/Picnic/Picnic.jpg",
+    "description": "Orgullosamente mexicanos, con más de 1000 sucursales.",
+    "address": "Pueblo En Lucha 129A, 2 de Agosto, 63175",
+    "hours": "10:30 AM - 6:00 PM",
+    "phone": "+52 3891083922",
+    "rating": 4.4,
+    "menuUrl": "#",
+    "category": "Local",
+    "carrusel": [
+      "/images/Picnic/Picnic1.jpg",
+      "/images/Picnic/Picnic2.jpg",
+      "/images/Picnic/Picnic3.jpg"
+    ]
   }
 ]
