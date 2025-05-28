@@ -9,7 +9,7 @@ import Resena from "./Components/Resena";
 import Navbar from "./Components/Navbar";
 import Carrusel from "./Components/Carrusel";
 import ProfileEditor from "./Components/ProfileEditor";
-import "./app.css";
+import "./App.css";
 
 function App() {
   return (
