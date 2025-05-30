@@ -5,7 +5,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../Style/CarouselStyles.css";
 import bandera from "../Assets/ubicacion.png";
-import lugares from "../data/lugares.json";
 
 function Carrusel() {
   const { id } = useParams(); // Obtenemos el parámetro 'id' de la URL
@@ -13,17 +12,60 @@ function Carrusel() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(5);
+  const [lugares, setLugares] = useState([]);
+  const [lugarActual, setLugarActual] = useState(null);
 
-  // Establecer el activeIndex al cargar el componente si 'id' está presente
   useEffect(() => {
-    if (id) {
-      const lugarIndex = lugares.findIndex(
-        (lugar) => lugar.id === parseInt(id)
-      );
-      if (lugarIndex !== -1) {
-        setActiveIndex(lugarIndex);
+    const fetchLugares = async () => {
+      try {
+        const res = await fetch("http://localhost:4000", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `
+              query {
+                getLugares {
+                  id
+                  Titulo
+                  Descripcion
+                  UrlImg
+                  categoria
+                  address
+                  phone
+                  hours
+                }
+              }
+            `,
+          }),
+        });
+        const json = await res.json();
+        const lugaresFromApi = json.data.getLugares.map((lugar) => ({
+          id: lugar.id,
+          title: lugar.Titulo,
+          description: lugar.Descripcion,
+          image: lugar.UrlImg,
+          category: lugar.categoria,
+          address: lugar.address,
+          phone: lugar.phone,
+          hours: lugar.hours,
+        }));
+        setLugares(lugaresFromApi);
+
+        if (id) {
+          const index = lugaresFromApi.findIndex((l) => l.id === id);
+          if (index !== -1) {
+            setActiveIndex(index);
+            setLugarActual(lugaresFromApi[index]);
+          }
+        } else if (lugaresFromApi.length > 0) {
+          setLugarActual(lugaresFromApi[0]);
+        }
+      } catch (error) {
+        console.error("Error al cargar los lugares:", error);
       }
-    }
+    };
+
+    fetchLugares();
   }, [id]);
 
   const handleAddComment = () => {
@@ -36,10 +78,11 @@ function Carrusel() {
 
   const handleSlideChange = (index) => {
     setActiveIndex(index);
+    setLugarActual(lugares[index]);
     setComments([]); // Limpia los comentarios si cambias de lugar
   };
 
-  const lugarActual = lugares[activeIndex];
+  if (!lugarActual) return <div className="text-center mt-5">Cargando lugar...</div>;
 
   return (
     <div className="container mt-4">
@@ -62,44 +105,35 @@ function Carrusel() {
           ))}
         </div>
         <div className="carousel-inner">
-          {lugarActual.carrusel.map((imagen, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <img
-                className="d-block w-100"
-                src={imagen}
-                alt={`Slide ${index + 1}`}
-              />
-            </div>
-          ))}
+          <div className="carousel-item active">
+            <img
+              className="d-block w-100"
+              src={lugarActual.image}
+              alt={lugarActual.title}
+            />
+          </div>
         </div>
 
-        <a
+        <button
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-bs-slide="prev"
+          onClick={() => {
+            const newIndex = (activeIndex - 1 + lugares.length) % lugares.length;
+            handleSlideChange(newIndex);
+          }}
         >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Previous</span>
-        </a>
-        <a
+        </button>
+        <button
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-bs-slide="next"
+          onClick={() => {
+            const newIndex = (activeIndex + 1) % lugares.length;
+            handleSlideChange(newIndex);
+          }}
         >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
-        </a>
+        </button>
       </div>
 
       {/* Contenedor inferior */}
