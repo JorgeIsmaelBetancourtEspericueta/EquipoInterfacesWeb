@@ -10,14 +10,14 @@ export default function Resena() {
   const [filter, setFilter] = useState("Todas");
   const [showModal, setShowModal] = useState(false);
   const [newPlace, setNewPlace] = useState({
-  title: "",
-  description: "",
-  image: "",
-  category: "Local",
-  address: "",
-  phone: "",
-  hours: "",
-});
+    title: "",
+    description: "",
+    images: [""],
+    category: "Local",
+    address: "",
+    phone: "",
+    hours: "",
+  });
   const [likedCards, setLikedCards] = useState({});
   const [cards, setCards] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
@@ -27,7 +27,7 @@ export default function Resena() {
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("https://api-lugares-ygbm.onrender.com/ ", {
+        const res = await fetch("http://localhost:4000/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -37,7 +37,7 @@ export default function Resena() {
                   id
                   Titulo
                   Descripcion
-                  UrlImg
+                  UrlImgList
                   categoria
                 }
               }
@@ -46,13 +46,19 @@ export default function Resena() {
         });
 
         const json = await res.json();
-        const lugares = json.data.getLugares.map((l) => ({
-          id: l.id,
-          title: l.Titulo,
-          description: l.Descripcion,
-          image: l.UrlImg,
-          category: l.categoria,
-        }));
+        const lugaresRaw = json.data?.getLugares || [];
+        const lugares = lugaresRaw
+          .filter((l) => l !== null && typeof l === "object" && l.id)
+          .map((l) => ({
+            id: l.id,
+            title: l.Titulo,
+            description: l.Descripcion,
+            images: l.UrlImgList || [],
+            category: l.categoria,
+            address: l.address || "",
+            phone: l.phone || "",
+            hours: l.hours || "",
+          }));
         setCards(lugares);
       } catch (err) {
         console.error("Error al obtener los lugares:", err);
@@ -75,9 +81,14 @@ export default function Resena() {
   const handleModalToggle = () => setShowModal(!showModal);
 
   const handleFormChange = (e) => {
-    setNewPlace({ ...newPlace, [e.target.name]: e.target.value });
-    if (e.target.name === "image") {
-      setPreviewImages([e.target.value]);
+    if (e.target.name.startsWith("image-")) {
+      const index = parseInt(e.target.name.split("-")[1], 10);
+      const newImages = [...newPlace.images];
+      newImages[index] = e.target.value;
+      setNewPlace({ ...newPlace, images: newImages });
+      setPreviewImages(newImages);
+    } else {
+      setNewPlace({ ...newPlace, [e.target.name]: e.target.value });
     }
   };
 
@@ -88,7 +99,7 @@ export default function Resena() {
       mutation CreateLugar(
         $Titulo: String!
         $Descripcion: String!
-        $UrlImg: String!
+        $UrlImgList: [String!]!
         $categoria: String!
         $address: String
         $phone: String
@@ -97,7 +108,7 @@ export default function Resena() {
         createLugar(
           Titulo: $Titulo
           Descripcion: $Descripcion
-          UrlImg: $UrlImg
+          UrlImgList: $UrlImgList
           categoria: $categoria
           address: $address
           phone: $phone
@@ -106,7 +117,7 @@ export default function Resena() {
           id
           Titulo
           Descripcion
-          UrlImg
+          UrlImgList
           categoria
           address
           phone
@@ -118,7 +129,7 @@ export default function Resena() {
     const variables = {
       Titulo: newPlace.title,
       Descripcion: newPlace.description,
-      UrlImg: newPlace.image,
+      UrlImgList: newPlace.images,
       categoria: newPlace.category,
       address: newPlace.address,
       phone: newPlace.phone,
@@ -126,7 +137,7 @@ export default function Resena() {
     };
 
     try {
-      const res = await fetch("https://api-lugares-ygbm.onrender.com/ ", {
+      const res = await fetch("http://localhost:4000/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, variables }),
@@ -147,7 +158,7 @@ export default function Resena() {
           id: nuevo.id,
           title: nuevo.Titulo,
           description: nuevo.Descripcion,
-          image: nuevo.UrlImg,
+          images: nuevo.UrlImgList,
           category: nuevo.categoria,
           address: nuevo.address,
           phone: nuevo.phone,
@@ -158,7 +169,7 @@ export default function Resena() {
       setNewPlace({
         title: "",
         description: "",
-        image: "",
+        images: [""],
         category: "Local",
         address: "",
         phone: "",
@@ -236,7 +247,7 @@ export default function Resena() {
           <div className="modal show d-block" tabIndex="-1" style={{ zIndex: 1050 }}>
             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div className="modal-content" style={{ maxHeight: "90vh", overflowY: "auto" }}>
-                          <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit}>
               <div className="modal-header position-relative border-0">
                 <h5 className="modal-title">Agregar nuevo lugar</h5>
                 <button
@@ -279,15 +290,28 @@ export default function Resena() {
 
                 <div className="row mb-4">
                   <div className="col-md-6">
-                    <label className="form-label">URL de la Imagen</label>
-                    <input
-                      type="text"
-                      className="form-control form-control-lg shadow-sm"
-                      name="image"
-                      value={newPlace.image}
-                      onChange={handleFormChange}
-                      required
-                    />
+                    <label className="form-label">URLs de Imágenes</label>
+                    {newPlace.images.map((img, index) => (
+                      <input
+                        key={index}
+                        type="text"
+                        className="form-control form-control-lg shadow-sm mb-2"
+                        placeholder={`Imagen #${index + 1}`}
+                        name={`image-${index}`}
+                        value={img}
+                        onChange={handleFormChange}
+                        required
+                      />
+                    ))}
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-secondary mb-2"
+                      onClick={() =>
+                        setNewPlace({ ...newPlace, images: [...newPlace.images, ""] })
+                      }
+                    >
+                      + Añadir otra imagen
+                    </button>
                   </div>
                   <div className="col-md-6">
                     <label className="form-label">Categoría</label>
@@ -373,6 +397,7 @@ export default function Resena() {
                       const files = Array.from(e.target.files);
                       const urls = files.map((file) => URL.createObjectURL(file));
                       setPreviewImages(urls);
+                      setNewPlace({ ...newPlace, images: urls });
                     }}
                   />
                 </div>
@@ -441,7 +466,7 @@ export default function Resena() {
               }}
             >
               <img
-                src={card.image}
+                src={card.images?.[0] || "https://via.placeholder.com/300x200?text=Sin+imagen"}
                 alt={card.title}
                 className="card-img-top"
                 style={{ height: "200px", objectFit: "cover" }}
