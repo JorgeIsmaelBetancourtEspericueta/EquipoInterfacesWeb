@@ -20,7 +20,7 @@ function Carrusel() {
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("http://localhost:4000/", {
+        const res = await fetch("https://api-lugares-ygbm.onrender.com", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -41,16 +41,18 @@ function Carrusel() {
           }),
         });
         const json = await res.json();
-        const lugaresFromApi = (json.data?.getLugares || []).filter(Boolean).map((lugar) => ({
-          id: lugar.id,
-          title: lugar.Titulo,
-          description: lugar.Descripcion,
-          images: lugar.UrlImgList,
-          category: lugar.categoria,
-          address: lugar.address,
-          phone: lugar.phone,
-          hours: lugar.hours,
-        }));
+        const lugaresFromApi = (json.data?.getLugares || [])
+          .filter(Boolean)
+          .map((lugar) => ({
+            id: lugar.id,
+            title: lugar.Titulo,
+            description: lugar.Descripcion,
+            images: lugar.UrlImgList,
+            category: lugar.categoria,
+            address: lugar.address,
+            phone: lugar.phone,
+            hours: lugar.hours,
+          }));
         setLugares(lugaresFromApi);
 
         if (id) {
@@ -87,7 +89,8 @@ function Carrusel() {
     setActiveImageIndex(0); // Reinicia la imagen activa al cambiar de lugar
   };
 
-  if (!lugarActual) return <div className="text-center mt-5">Cargando lugar...</div>;
+  if (!lugarActual)
+    return <div className="text-center mt-5">Cargando lugar...</div>;
 
   return (
     <div className="container mt-4">
@@ -113,9 +116,15 @@ function Carrusel() {
           {lugarActual.images.map((img, index) => (
             <div
               key={index}
-              className={`carousel-item ${index === activeImageIndex ? "active" : ""}`}
+              className={`carousel-item ${
+                index === activeImageIndex ? "active" : ""
+              }`}
             >
-              <img className="d-block w-100" src={img} alt={`Imagen ${index + 1}`} />
+              <img
+                className="d-block w-100"
+                src={img}
+                alt={`Imagen ${index + 1}`}
+              />
             </div>
           ))}
         </div>
@@ -123,11 +132,16 @@ function Carrusel() {
         <button
           className="carousel-control-prev"
           onClick={() => {
-            const newIndex = (activeImageIndex - 1 + lugarActual.images.length) % lugarActual.images.length;
+            const newIndex =
+              (activeImageIndex - 1 + lugarActual.images.length) %
+              lugarActual.images.length;
             setActiveImageIndex(newIndex);
           }}
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Previous</span>
         </button>
         <button
@@ -137,7 +151,10 @@ function Carrusel() {
             setActiveImageIndex(newIndex);
           }}
         >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Next</span>
         </button>
       </div>

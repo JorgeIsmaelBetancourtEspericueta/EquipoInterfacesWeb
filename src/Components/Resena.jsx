@@ -27,7 +27,7 @@ export default function Resena() {
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("http://localhost:4000/", {
+        const res = await fetch("https://api-lugares-ygbm.onrender.com", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -137,7 +137,7 @@ export default function Resena() {
     };
 
     try {
-      const res = await fetch("http://localhost:4000/", {
+      const res = await fetch("https://api-lugares-ygbm.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, variables }),
