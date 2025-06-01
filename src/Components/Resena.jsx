@@ -27,7 +27,7 @@ export default function Resena() {
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("http://localhost:4000", {
+        const res = await fetch("https://api-lugares-ygbm.onrender.com/ ", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -126,7 +126,7 @@ export default function Resena() {
     };
 
     try {
-      const res = await fetch("http://localhost:4000", {
+      const res = await fetch("https://api-lugares-ygbm.onrender.com/ ", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, variables }),
@@ -427,7 +427,19 @@ export default function Resena() {
       <div className="row">
         {filteredCards.map((card) => (
           <div className="col-md-4 mb-4" key={card.id}>
-            <div className="card h-100">
+            <div
+              className="card h-100 shadow"
+              style={{
+                transform: "rotate(-4deg)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "rotate(0deg)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "rotate(-4deg)";
+              }}
+            >
               <img
                 src={card.image}
                 alt={card.title}
