@@ -1,0 +1,23 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.navbar-links-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto; /* <-- Esto empuja los links a la derecha */
+  align-items: center;
+}
+
+.navbar-auth-container {
+  margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-container {
+  display: none; /* O según tu breakpoint para responsive */
+}

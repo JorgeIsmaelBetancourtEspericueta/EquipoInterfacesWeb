@@ -54,13 +54,21 @@ export default function ProfileEditor() {
     }
   };
 
+  // const handleEditToggle = () => {
+  //   if (isEditing) {
+  //     // Aquí podrías agregar lógica para guardar en base de datos
+  //     console.log("Perfil guardado:", profile);
+  //   }
+  //   setIsEditing(!isEditing);
+  // };
+
   const handleEditToggle = () => {
-    if (isEditing) {
-      // Aquí podrías agregar lógica para guardar en base de datos
-      console.log("Perfil guardado:", profile);
-    }
-    setIsEditing(!isEditing);
-  };
+  if (isEditing) {
+    localStorage.setItem("userProfile", JSON.stringify(profile));
+    console.log("Perfil guardado:", profile);
+  }
+  setIsEditing(!isEditing);
+};
 
   return (
     <div
@@ -77,7 +85,7 @@ export default function ProfileEditor() {
             <div className="card-body">
               <div className="mb-3 position-relative text-center">
                 <img
-                  src={profile.photo || "https://via.placeholder.com/150"}
+                  src={profile.photo || "https://cdn-icons-png.freepik.com/512/4519/4519729.png"}
                   alt="Foto de perfil"
                   className="rounded-circle profile-photo"
                 />
@@ -177,7 +185,7 @@ export default function ProfileEditor() {
                 <div className="text-center text-white">
                   <Restaurant className="fs-1 mb-3" />
                   <p>No hay lugares cargados</p>
-                  <Link to="/explorar" className="btn btn-link text-white">
+                  <Link to="/resena" className="btn btn-link text-white">
                     Explorar lugares
                   </Link>
                 </div>
