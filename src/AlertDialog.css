@@ -1,0 +1,84 @@
+/* src/components/AlertDialog.css */
+
+.alert-overlay {
+    position: fixed; /* Fija la posición en la ventana de visualización */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ancho completo de la ventana */
+    height: 100vh; /* Alto completo de la ventana */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido (el modal) */
+    align-items: center; /* Centra verticalmente el contenido (el modal) */
+    z-index: 2000; /* Asegura que esté por encima de casi todo lo demás */
+}
+
+.alert-dialog {
+    background-color: #fff; /* Fondo blanco para la caja del modal */
+    padding: 30px;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    text-align: center;
+    max-width: 400px;
+    width: 90%; /* Ajuste para pantallas pequeñas */
+    transform: scale(0.95); /* Inicio de animación (ligeramente más pequeño) */
+    animation: popIn 0.3s ease-out forwards; /* Animación de aparición */
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.alert-icon {
+    font-size: 70px; /* Tamaño del icono */
+    margin-bottom: 20px;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid; /* Borde alrededor del icono */
+    border-radius: 50%; /* Icono circular */
+    padding: 10px;
+    box-sizing: content-box;
+}
+
+.alert-dialog h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.alert-dialog p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.alert-dialog button {
+    background-color: #fe9e0d; /* Tu color naranja principal */
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alert-dialog button:hover {
+    background-color: #e88b00; /* Tono más oscuro al pasar el ratón */
+}
+
+/* Colores específicos para el botón del tipo 'info' si quieres que sea azul */
+.alert-dialog button[style*="background-color: rgb(33, 150, 243)"]:hover {
+    background-color: #1976D2 !important;
+}
