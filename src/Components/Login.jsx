@@ -130,7 +130,7 @@ export default function Login({ onLogin }) {
       () => { // Callback que se ejecuta cuando el usuario presiona OK
         onLogin(newUser);
         // Podrías redirigir a la página principal o mantener en el login para que el usuario inicie sesión
-        navigate("/", { state: { user: newUser } });
+        navigate("/login", { state: { user: newUser } });
       }
     );
 
