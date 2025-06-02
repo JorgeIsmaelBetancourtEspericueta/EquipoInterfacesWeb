@@ -23,35 +23,37 @@ import "../Style/Navbar.css";
 
 
 const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-  const location = useLocation();
-  const [currentHash, setCurrentHash] = useState(window.location.hash);
-  const [profilePhoto, setProfilePhoto] = useState("");
+  const [openMenu, setOpenMenu] = useState(false); // Abre/cierra el Drawer (menú móvil).
+  const location = useLocation();  // Detecta ruta actual.
+  const [currentHash, setCurrentHash] = useState(window.location.hash); // Detecta sección anclada (#about, #contacto).
+  const [profilePhoto, setProfilePhoto] = useState("");  // Foto del usuario logueado (desde localStorage).
 
   useEffect(() => {
     const savedProfile = JSON.parse(localStorage.getItem("userProfile"));
     if (savedProfile?.photo) {
       setProfilePhoto(savedProfile.photo);
     }
-  }, []);
+  }, []);// Al montar el componente, carga la foto del perfil desde localStorage.
 
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const openProfileMenu = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null); // Controla el menú desplegable del perfil.
+  const openProfileMenu = Boolean(anchorEl); // Determina si el menú está abierto.
   const handleClickProfile = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleCloseProfile = () => {
     setAnchorEl(null);
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Simula que el usuario está logueado
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("isLoggedIn") === "true";
+  }); // Simula que el usuario está logueado
 
-  // Actualizar el estado cuando cambia el hash
+
   useEffect(() => {
     const updateHash = () => setCurrentHash(window.location.hash);
     window.addEventListener("hashchange", updateHash);
     return () => window.removeEventListener("hashchange", updateHash);
-  }, []);
+  }, []);// Actualiza el estado 'currentHash' cuando cambia el hash en la URL.
 
   const menuOptions = [
     { text: "Home", icon: <HomeIcon />, link: "/" },
@@ -139,7 +141,10 @@ const Navbar = () => {
               <MenuItem
                 onClick={() => {
                   setIsLoggedIn(false);
+                  localStorage.setItem("isLoggedIn", "false");
+                  window.location.reload();
                   handleCloseProfile();
+                  
                 }}
               >
                 <Link to="/">Cerrar sesión</Link>

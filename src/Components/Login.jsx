@@ -20,7 +20,7 @@ export default function Login({ onLogin }) {
     title: "",     // Título del modal
     message: "",   // Mensaje del modal
     type: "",      // Tipo de mensaje ('success', 'error', 'info') para iconos/colores
-    onConfirm: () => {}, // Función que se ejecuta cuando el usuario presiona OK
+    onConfirm: () => { }, // Función que se ejecuta cuando el usuario presiona OK
   });
 
   const [users, setUsers] = useState(() => {
@@ -62,7 +62,7 @@ export default function Login({ onLogin }) {
   }, [alertDialog]); // Dependencia necesaria sialertDialog se usa en los callbacks
 
   // Función para mostrar el AlertDialog
-  const showAlertDialog = (title, message, type, callback = () => {}) => {
+  const showAlertDialog = (title, message, type, callback = () => { }) => {
     setAlertDialog({
       isOpen: true,
       title,
@@ -87,8 +87,17 @@ export default function Login({ onLogin }) {
         `¡Bienvenido de nuevo, ${foundUser.name}!`,
         "success",
         () => { // Callback que se ejecuta cuando el usuario presiona OK
+          localStorage.setItem("isLoggedIn", "true"); //Guarda que se al logeado
+          localStorage.setItem("userProfile", JSON.stringify({
+            name: foundUser.name,
+            email: foundUser.email,
+            phone: "123-456-7890", 
+            photo: "",
+            career: ""
+          })); //Guarda los datos del usurio
           onLogin(foundUser);
           navigate("/", { state: { user: foundUser } });
+          window.location.reload();
         }
       );
     } else {
@@ -128,9 +137,18 @@ export default function Login({ onLogin }) {
       `¡Gracias por registrarte, ${newUser.name}!`,
       "success",
       () => { // Callback que se ejecuta cuando el usuario presiona OK
+        localStorage.setItem("isLoggedIn", "true"); //guarda que se al logeado
+        localStorage.setItem("userProfile", JSON.stringify({
+          name: newUser.name,
+          email: newUser.email,
+          phone: "",  
+          photo: "",
+          career: ""
+        }));
         onLogin(newUser);
         // Podrías redirigir a la página principal o mantener en el login para que el usuario inicie sesión
         navigate("/", { state: { user: newUser } });
+        window.location.reload();
       }
     );
 

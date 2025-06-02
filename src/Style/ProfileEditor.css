@@ -127,7 +127,7 @@
   }
 
   .profile-photo {
-    width: 100px; /* Reduce aún más el tamaño de la foto */
+    width: 100px; /* Reduce el tamaño de la foto */
     height: 100px;
   }
 
@@ -147,7 +147,7 @@
 }
 
 .profile-card {
-  background-color: #714600; /* fondo oscuro profesional */
+  background-color: #f39c12; /* fondo oscuro */
   color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
