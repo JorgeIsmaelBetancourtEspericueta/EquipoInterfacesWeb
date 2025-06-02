@@ -8,18 +8,23 @@ import {
   School,
   Favorite,
   Restaurant,
-} from "@mui/icons-material";
+} from "@mui/icons-material"; // Iconos de Material UI utilizados en los campos del formulario
 import { Link } from "react-router-dom";
 
 export default function ProfileEditor() {
-  const [profile, setProfile] = useState({
-    name: "Jorge Ismael",
-    email: "jorge@example.com",
-    phone: "123-456-7890",
-    photo: "",
-    career: "",
+  const [profile, setProfile] = useState(() => {
+    const savedProfile = localStorage.getItem("userProfile");
+    return savedProfile
+      ? JSON.parse(savedProfile)
+      : {
+        name: "Jesús Ismael",
+        email: "jesus@gmail.com",
+        phone: "123-456-7890",
+        photo: "",
+        career: "",
+      };
   });
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // Controla si se está editando el perfil.
   const [favorites, setFavorites] = useState([]);
 
   const careers = [
@@ -41,7 +46,7 @@ export default function ProfileEditor() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
-  };
+  }; //Actualiza los valores del perfil conforme el usuario escribe en los campos del formulario.
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -52,15 +57,24 @@ export default function ProfileEditor() {
       };
       reader.readAsDataURL(file);
     }
-  };
+  }; //Carga una imagen local y la convierte a base64 para guardarla en el estado.
+
+  // const handleEditToggle = () => {
+  //   if (isEditing) {
+  //     // Aquí podrías agregar lógica para guardar en base de datos
+  //     console.log("Perfil guardado:", profile);
+  //   }
+  //   setIsEditing(!isEditing);
+  // };
 
   const handleEditToggle = () => {
     if (isEditing) {
-      // Aquí podrías agregar lógica para guardar en base de datos
+      localStorage.setItem("userProfile", JSON.stringify(profile));
       console.log("Perfil guardado:", profile);
+      window.location.reload();
     }
     setIsEditing(!isEditing);
-  };
+  }; //Guarda los cambios en localStorage y recarga la página al desactivar la edición.
 
   return (
     <div
@@ -77,7 +91,7 @@ export default function ProfileEditor() {
             <div className="card-body">
               <div className="mb-3 position-relative text-center">
                 <img
-                  src={profile.photo || "https://via.placeholder.com/150"}
+                  src={profile.photo || "https://cdn-icons-png.freepik.com/512/4519/4519729.png"}
                   alt="Foto de perfil"
                   className="rounded-circle profile-photo"
                 />
@@ -177,7 +191,7 @@ export default function ProfileEditor() {
                 <div className="text-center text-white">
                   <Restaurant className="fs-1 mb-3" />
                   <p>No hay lugares cargados</p>
-                  <Link to="/explorar" className="btn btn-link text-white">
+                  <Link to="/resena" className="btn btn-link text-white">
                     Explorar lugares
                   </Link>
                 </div>

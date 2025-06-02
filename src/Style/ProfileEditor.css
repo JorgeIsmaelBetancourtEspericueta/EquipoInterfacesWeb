@@ -127,7 +127,7 @@
   }
 
   .profile-photo {
-    width: 100px; /* Reduce aún más el tamaño de la foto */
+    width: 100px; /* Reduce el tamaño de la foto */
     height: 100px;
   }
 
@@ -144,4 +144,53 @@
   .card-title {
     font-size: 18px; /* Reduce aún más el tamaño del título */
   }
+}
+
+.profile-card {
+  background-color: #f39c12; /* fondo oscuro */
+  color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.profile-input {
+  background-color: #65450174;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.profile-input:disabled {
+  background-color: #65450174;
+  color: #ccc;
+}
+
+.profile-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.profile-btn:hover {
+  background-color: #0056b3;
+}
+
+.list-group-item {
+  background-color: #714600;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
 }
