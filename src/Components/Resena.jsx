@@ -22,12 +22,18 @@ export default function Resena() {
   const [cards, setCards] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [message, setMessage] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [placeToDelete, setPlaceToDelete] = useState(null);
+  // Estados para horario de apertura y cierre
+  const [horaInicio, setHoraInicio] = useState("");
+  const [horaFin, setHoraFin] = useState("");
 
   // OBTENER LUGARES DESDE API GRAPHQL
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("http://localhost:4000/", {
+        const res = await fetch("https://api-lugares-ygbm.onrender.com/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -39,6 +45,9 @@ export default function Resena() {
                   Descripcion
                   UrlImgList
                   categoria
+                  address
+                  phone
+                  hours
                 }
               }
             `,
@@ -95,7 +104,40 @@ export default function Resena() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const query = `
+    const mutation = editId
+      ? `
+    mutation UpdateLugar(
+      $id: ID!
+      $Titulo: String!
+      $Descripcion: String!
+      $UrlImgList: [String!]!
+      $categoria: String!
+      $address: String
+      $phone: String
+      $hours: String
+    ) {
+      updateLugar(
+        id: $id
+        Titulo: $Titulo
+        Descripcion: $Descripcion
+        UrlImgList: $UrlImgList
+        categoria: $categoria
+        address: $address
+        phone: $phone
+        hours: $hours
+      ) {
+        id
+        Titulo
+        Descripcion
+        UrlImgList
+        categoria
+        address
+        phone
+        hours
+      }
+    }
+    `
+      : `
       mutation CreateLugar(
         $Titulo: String!
         $Descripcion: String!
@@ -127,6 +169,7 @@ export default function Resena() {
     `;
 
     const variables = {
+      ...(editId && { id: editId }),
       Titulo: newPlace.title,
       Descripcion: newPlace.description,
       UrlImgList: newPlace.images,
@@ -137,10 +180,10 @@ export default function Resena() {
     };
 
     try {
-      const res = await fetch("http://localhost:4000/", {
+      const res = await fetch("https://api-lugares-ygbm.onrender.com/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, variables }),
+        body: JSON.stringify({ query: mutation, variables }),
       });
 
       const json = await res.json();
@@ -150,21 +193,40 @@ export default function Resena() {
         throw new Error("Error en la petición GraphQL");
       }
 
-      const nuevo = json.data.createLugar;
-
-      setCards([
-        ...cards,
-        {
-          id: nuevo.id,
-          title: nuevo.Titulo,
-          description: nuevo.Descripcion,
-          images: nuevo.UrlImgList,
-          category: nuevo.categoria,
-          address: nuevo.address,
-          phone: nuevo.phone,
-          hours: nuevo.hours,
-        },
-      ]);
+      if (editId) {
+        const actualizado = json.data.updateLugar;
+        setCards(
+          cards.map((c) =>
+            c.id === editId
+              ? {
+                  id: actualizado.id,
+                  title: actualizado.Titulo,
+                  description: actualizado.Descripcion,
+                  images: actualizado.UrlImgList,
+                  category: actualizado.categoria,
+                  address: actualizado.address,
+                  phone: actualizado.phone,
+                  hours: actualizado.hours,
+                }
+              : c
+          )
+        );
+      } else {
+        const nuevo = json.data.createLugar;
+        setCards([
+          ...cards,
+          {
+            id: nuevo.id,
+            title: nuevo.Titulo,
+            description: nuevo.Descripcion,
+            images: nuevo.UrlImgList,
+            category: nuevo.categoria,
+            address: nuevo.address,
+            phone: nuevo.phone,
+            hours: nuevo.hours,
+          },
+        ]);
+      }
 
       setNewPlace({
         title: "",
@@ -177,12 +239,68 @@ export default function Resena() {
       });
       setPreviewImages([]);
       setShowModal(false);
-      setMessage("¡Lugar guardado exitosamente!");
+      setEditId(null);
+      setMessage(editId ? "¡Lugar actualizado correctamente!" : "¡Lugar guardado exitosamente!");
       setTimeout(() => setMessage(""), 3000);
     } catch (error) {
       console.error("Error al guardar:", error);
       setMessage("Error al guardar el lugar.");
     }
+  };
+
+  const handleEditLugar = (card) => {
+    setNewPlace({
+      title: card.title,
+      description: card.description,
+      images: card.images,
+      category: card.category,
+      address: card.address,
+      phone: card.phone || "",
+      hours: card.hours || "",
+    });
+    setPreviewImages(card.images);
+    // Descomponer el horario en apertura y cierre
+    const [horaInicioTmp, horaFinTmp] = (card.hours || "").split(" - ");
+    setHoraInicio(horaInicioTmp || "");
+    setHoraFin(horaFinTmp || "");
+    setShowModal(true);
+    setEditId(card.id);
+  };
+
+  const confirmDeleteLugar = (id) => {
+    setPlaceToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const performDeleteLugar = async () => {
+    const query = `
+      mutation DeleteLugar($id: ID!) {
+        deleteLugar(id: $id)
+      }
+    `;
+
+    try {
+      const res = await fetch("https://api-lugares-ygbm.onrender.com/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, variables: { id: placeToDelete } }),
+      });
+
+      const json = await res.json();
+      if (json.errors) {
+        console.error("Error de GraphQL al eliminar:", json.errors);
+        return;
+      }
+
+      setCards(cards.filter((c) => c.id !== placeToDelete));
+      setMessage("¡Lugar eliminado correctamente!");
+      setTimeout(() => setMessage(""), 3000);
+    } catch (error) {
+      console.error("Error al eliminar:", error);
+    }
+
+    setShowDeleteModal(false);
+    setPlaceToDelete(null);
   };
 
   const toggleLike = (id) => {
@@ -249,7 +367,7 @@ export default function Resena() {
               <div className="modal-content" style={{ maxHeight: "90vh", overflowY: "auto" }}>
             <form onSubmit={handleFormSubmit}>
               <div className="modal-header position-relative border-0">
-                <h5 className="modal-title">Agregar nuevo lugar</h5>
+                <h5 className="modal-title">{editId ? "Actualizar lugar" : "Agregar nuevo lugar"}</h5>
                 <button
                   type="button"
                   className="btn-close position-absolute"
@@ -292,25 +410,37 @@ export default function Resena() {
                   <div className="col-md-6">
                     <label className="form-label">URLs de Imágenes</label>
                     {newPlace.images.map((img, index) => (
-                      <input
-                        key={index}
-                        type="text"
-                        className="form-control form-control-lg shadow-sm mb-2"
-                        placeholder={`Imagen #${index + 1}`}
-                        name={`image-${index}`}
-                        value={img}
-                        onChange={handleFormChange}
-                        required
-                      />
+                      <div key={index} className="d-flex align-items-center mb-2">
+                        <input
+                          type="text"
+                          className="form-control form-control-lg shadow-sm me-2"
+                          placeholder={`Imagen #${index + 1}`}
+                          name={`image-${index}`}
+                          value={img}
+                          onChange={handleFormChange}
+                          required
+                        />
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-danger px-2 py-1"
+                          onClick={() => {
+                            const newImages = newPlace.images.filter((_, i) => i !== index);
+                            setNewPlace({ ...newPlace, images: newImages });
+                            setPreviewImages(newImages);
+                          }}
+                        >
+                          🗑️
+                        </button>
+                      </div>
                     ))}
                     <button
                       type="button"
-                      className="btn btn-sm btn-outline-secondary mb-2"
+                      className="btn btn-sm btn-outline-secondary mb-2 small"
                       onClick={() =>
                         setNewPlace({ ...newPlace, images: [...newPlace.images, ""] })
                       }
                     >
-                      + Añadir otra imagen
+                      Añadir otra imagen
                     </button>
                   </div>
                   <div className="col-md-6">
@@ -362,12 +492,14 @@ export default function Resena() {
                       type="time"
                       className="form-control form-control-lg shadow-sm"
                       placeholder="Hora de apertura"
-                      onChange={(e) =>
+                      value={horaInicio}
+                      onChange={(e) => {
+                        setHoraInicio(e.target.value);
                         setNewPlace({
                           ...newPlace,
-                          hours: `${e.target.value} - ${newPlace.hours?.split(" - ")[1] || ""}`,
-                        })
-                      }
+                          hours: `${e.target.value} - ${horaFin}`,
+                        });
+                      }}
                     />
                   </div>
                   <div className="col-md-6">
@@ -375,12 +507,14 @@ export default function Resena() {
                       type="time"
                       className="form-control form-control-lg shadow-sm"
                       placeholder="Hora de cierre"
-                      onChange={(e) =>
+                      value={horaFin}
+                      onChange={(e) => {
+                        setHoraFin(e.target.value);
                         setNewPlace({
                           ...newPlace,
-                          hours: `${newPlace.hours?.split(" - ")[0] || ""} - ${e.target.value}`,
-                        })
-                      }
+                          hours: `${horaInicio} - ${e.target.value}`,
+                        });
+                      }}
                     />
                   </div>
                 </div>
@@ -424,7 +558,7 @@ export default function Resena() {
 
               <div className="modal-footer d-flex justify-content-end gap-2 border-0 pt-0">
                 <button type="submit" className="btn btn-warning btn-lg text-white">
-                  Agregar
+                  {editId ? "Actualizar" : "Agregar"}
                 </button>
                 <button
                   type="button"
@@ -447,6 +581,33 @@ export default function Resena() {
         <div className="alert alert-success text-center" role="alert">
           {message}
         </div>
+      )}
+
+      {showDeleteModal && (
+        <>
+          <div className="modal-backdrop show" style={{ zIndex: 1040 }}></div>
+          <div className="modal show d-block" style={{ zIndex: 1050 }}>
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content border-danger">
+                <div className="modal-header bg-danger text-white">
+                  <h5 className="modal-title">¿Estás seguro?</h5>
+                  <button className="btn-close" onClick={() => setShowDeleteModal(false)}></button>
+                </div>
+                <div className="modal-body text-center">
+                  <p className="fw-bold text-danger">⚠️ Esta acción eliminará el lugar permanentemente.</p>
+                </div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>
+                    Cancelar
+                  </button>
+                  <button className="btn btn-danger" onClick={performDeleteLugar}>
+                    Sí, eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
 
       <div className="row">
@@ -477,19 +638,33 @@ export default function Resena() {
               </div>
               <div className="card-footer d-flex justify-content-between align-items-center">
                 <div
-                  className={`text-danger ${
-                    likedCards[card.id] ? "fw-bold" : ""
-                  }`}
-                  style={{ cursor: "pointer" }}
+                  className={`text-danger ${likedCards[card.id] ? "fw-bold" : ""}`}
+                  style={{ cursor: "pointer", fontSize: "1.2rem" }}
                   onClick={() => toggleLike(card.id)}
                 >
                   <FaHeart />
                 </div>
-                <Link to={`/Carrusel/${card.id}`}>
-                  <button className="btn btn-outline-primary btn-sm">
-                    Ver más
+                <div className="d-flex align-items-center gap-2">
+                  <Link to={`/Carrusel/${card.id}`}>
+                    <button className="btn btn-outline-primary btn-sm fw-bold px-3 py-2">
+                      Ver más
+                    </button>
+                  </Link>
+                  <button
+                    className="btn btn-outline-warning btn-sm px-4 py-2"
+                    onClick={() => handleEditLugar(card)}
+                    title="Editar"
+                  >
+                    ✏️
                   </button>
-                </Link>
+                  <button
+                    className="btn btn-outline-danger btn-sm px-4 py-2"
+                    onClick={() => confirmDeleteLugar(card.id)}
+                    title="Eliminar"
+                  >
+                    🗑️
+                  </button>
+                </div>
               </div>
             </div>
           </div>
