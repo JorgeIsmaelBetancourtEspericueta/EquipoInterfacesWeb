@@ -136,7 +136,7 @@ const Navbar = () => {
                 <Link to="/profileEditor">Editar Perfil</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseProfile}>
-                <Link to="/favoritos">Favoritos</Link>
+                <Link to="/resena">Favoritos</Link>
               </MenuItem>
               <MenuItem
                 onClick={() => {
