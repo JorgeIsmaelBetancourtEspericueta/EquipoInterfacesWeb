@@ -45,9 +45,17 @@ Abre tu terminal, navega hasta el directorio del proyecto y ejecuta el siguiente
 3.- Inicia el proyecto:
 
 Una vez instaladas las dependencias, puedes iniciar la aplicación con: npm run dev
+
+Demostración en Video
+¿Prefieres una guía visual? Mira nuestro video de demostración en YouTube para un recorrido completo por FOODIE:
+
+[Enlace del video de Youtube]
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 Demostración en Video
 
 ¿Prefieres una guía visual? Mira nuestro video de demostración para un recorrido completo por FOODIE:
+https://www.youtube.com/watch?v=gKEBrk9GsRQ&ab_channel=JORGEISMAELBETANCOURTESPERICUETA
+___________________________________________________________________________________________________________________________________________________________________________________________________________________
+
 
