@@ -214,8 +214,7 @@ export default function Login({ onLogin }) {
                 required
               />
             </div>
-            <a href="#">¿Olvidaste tu contraseña?</a>
-            <button type="submit">Ingresar</button>
+                        <button type="submit">Ingresar</button>
           </form>
         </div>
 
