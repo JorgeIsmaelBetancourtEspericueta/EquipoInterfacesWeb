@@ -1,69 +1,78 @@
-// En Login.jsx
-
+// Importación de hooks y componentes necesarios
 import { useEffect, useState } from "react";
-import "../Login.css"; // Esto está bien si Login.css está en src/
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import AlertDialog from './AlertDialog.jsx';
-export default function Login({ onLogin }) {
-  const navigate = useNavigate();
+import "../Login.css"; // Importación del archivo de estilos CSS
+import { FaUser, FaEnvelope, FaLock } from "react-icons/fa"; // Íconos para los inputs
+import { useNavigate } from "react-router-dom"; // Hook para navegar entre rutas
+import AlertDialog from './AlertDialog.jsx'; // Componente modal para mostrar mensajes
 
+// Componente principal de Login
+export default function Login({ onLogin }) {
+  const navigate = useNavigate(); // Hook para redireccionar programáticamente
+
+  // Estados del formulario de inicio de sesión
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+
+  // Estados del formulario de registro
   const [signUpName, setSignUpName] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
 
-  // Estado para controlar la visibilidad y el contenido del modal AlertDialog
+  // Estado para controlar la visibilidad y contenido del modal de alerta
   const [alertDialog, setAlertDialog] = useState({
-    isOpen: false, // Controla si el modal está visible
-    title: "",     // Título del modal
-    message: "",   // Mensaje del modal
-    type: "",      // Tipo de mensaje ('success', 'error', 'info') para iconos/colores
-    onConfirm: () => { }, // Función que se ejecuta cuando el usuario presiona OK
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "", // success | error | info
+    onConfirm: () => {},
   });
 
+  // Carga inicial de usuarios registrados desde localStorage, si no existen, crea dos por defecto
   const [users, setUsers] = useState(() => {
     const storedUsers = localStorage.getItem("registeredUsers");
-    return storedUsers ? JSON.parse(storedUsers) : [
-      { email: "jesus@gmail.com", password: "123", name: "Chuyin" },
-      { email: "admin@example.com", password: "adminpass", name: "Admin" },
-    ];
+    return storedUsers
+      ? JSON.parse(storedUsers)
+      : [
+          { email: "jesus@gmail.com", password: "123", name: "Chuyin" },
+          { email: "jose@gmail.com", password: "123", name: "jose" },
+        ];
   });
 
+  // Guarda los usuarios actualizados en localStorage cada vez que se actualiza el estado `users`
   useEffect(() => {
     localStorage.setItem("registeredUsers", JSON.stringify(users));
   }, [users]);
 
+  // Añade los eventos a los botones de cambio de panel (login/registro)
   useEffect(() => {
     const container = document.getElementById("container");
     const registerBtn = document.getElementById("register");
     const loginBtn = document.getElementById("login");
 
+    // Cambia al panel de registro
     const handleRegisterClick = () => {
       container.classList.add("active");
-      // Asegura que el modal se cierre si el usuario cambia de panel
-      setAlertDialog({ ...alertDialog, isOpen: false });
+      setAlertDialog({ ...alertDialog, isOpen: false }); // Cierra el modal si está abierto
     };
 
+    // Cambia al panel de login
     const handleLoginClick = () => {
       container.classList.remove("active");
-      // Asegura que el modal se cierre si el usuario cambia de panel
-      setAlertDialog({ ...alertDialog, isOpen: false });
+      setAlertDialog({ ...alertDialog, isOpen: false }); // Cierra el modal si está abierto
     };
 
-    // Añade event listeners a los botones.
     registerBtn.addEventListener("click", handleRegisterClick);
     loginBtn.addEventListener("click", handleLoginClick);
 
+    // Limpieza de eventos al desmontar el componente
     return () => {
       registerBtn.removeEventListener("click", handleRegisterClick);
       loginBtn.removeEventListener("click", handleLoginClick);
     };
-  }, [alertDialog]); // Dependencia necesaria sialertDialog se usa en los callbacks
+  }, [alertDialog]); // alertDialog como dependencia ya que se usa en los callbacks
 
-  // Función para mostrar el AlertDialog
-  const showAlertDialog = (title, message, type, callback = () => { }) => {
+  // Función para mostrar el modal de alerta
+  const showAlertDialog = (title, message, type, callback = () => {}) => {
     setAlertDialog({
       isOpen: true,
       title,
@@ -71,37 +80,42 @@ export default function Login({ onLogin }) {
       type,
       onConfirm: () => {
         setAlertDialog({ ...alertDialog, isOpen: false }); // Cierra el modal
-        callback(); // Ejecuta cualquier acción de seguimiento (como la navegación)
+        callback(); // Ejecuta acción posterior (ej. navegación)
       },
     });
   };
 
+  // Procesa el formulario de inicio de sesión
   const handleSignInSubmit = (e) => {
     e.preventDefault();
+
+    // Busca usuario que coincida con las credenciales
     const foundUser = users.find(
       (user) => user.email === signInEmail && user.password === signInPassword
     );
 
     if (foundUser) {
+      // Muestra alerta de éxito con callback que guarda datos y redirige
       showAlertDialog(
         "Inicio de Sesión Exitoso",
         `¡Bienvenido de nuevo, ${foundUser.name}!`,
         "success",
-        () => { // Callback que se ejecuta cuando el usuario presiona OK
-          localStorage.setItem("isLoggedIn", "true"); //Guarda que se al logeado
+        () => {
+          localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("userProfile", JSON.stringify({
             name: foundUser.name,
             email: foundUser.email,
-            phone: "123-456-7890", 
+            phone: "123-456-7890",
             photo: "",
             career: ""
-          })); //Guarda los datos del usurio
-          onLogin(foundUser);
+          }));
+          onLogin(foundUser); // Callback que viene del padre
           navigate("/", { state: { user: foundUser } });
-          window.location.reload();
+          window.location.reload(); // Fuerza recarga para reflejar sesión
         }
       );
     } else {
+      // Muestra error si no coinciden las credenciales
       showAlertDialog(
         "Error de Inicio de Sesión",
         "Credenciales incorrectas. Por favor, inténtalo de nuevo.",
@@ -110,9 +124,11 @@ export default function Login({ onLogin }) {
     }
   };
 
+  // Procesa el formulario de registro
   const handleSignUpSubmit = (e) => {
-    e.preventDefault(); // Previene el comportamiento por defecto del formulario.
+    e.preventDefault();
 
+    // Valida que el correo no esté ya registrado
     const emailExists = users.some(user => user.email === signUpEmail);
     if (emailExists) {
       showAlertDialog(
@@ -120,38 +136,39 @@ export default function Login({ onLogin }) {
         "Este correo electrónico ya está registrado. Por favor, utiliza otro o inicia sesión.",
         "error"
       );
-      return; // Detiene la ejecución si el email ya existe.
+      return;
     }
 
+    // Crea nuevo usuario y lo guarda
     const newUser = {
       name: signUpName,
       email: signUpEmail,
       password: signUpPassword,
     };
-
     setUsers(prevUsers => [...prevUsers, newUser]);
 
-    console.log("Nuevo usuario registrado:", newUser); // Muestra el nuevo usuario en consola.
+    console.log("Nuevo usuario registrado:", newUser);
 
+    // Alerta de éxito con navegación
     showAlertDialog(
       "Registro Exitoso",
       `¡Gracias por registrarte, ${newUser.name}!`,
       "success",
-      () => { // Callback que se ejecuta cuando el usuario presiona OK
-        localStorage.setItem("isLoggedIn", "true"); //guarda que se al logeado
+      () => {
+        localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userProfile", JSON.stringify({
           name: newUser.name,
           email: newUser.email,
-          phone: "",  
+          phone: "",
           photo: "",
           career: ""
         }));
         onLogin(newUser);
-        // Podrías redirigir a la página principal o mantener en el login para que el usuario inicie sesión
-        navigate("/login", { state: { user: newUser } });
+        navigate("/login", { state: { user: newUser } }); // Puede ser cambiado a "/" si prefieres redirigir al home
       }
     );
 
+    // Limpia los campos del formulario
     setSignUpName("");
     setSignUpEmail("");
     setSignUpPassword("");
@@ -160,7 +177,7 @@ export default function Login({ onLogin }) {
   // Renderizado del componente
   return (
     <div className="login-page">
-      {/* <--- Aquí se renderiza el componente AlertDialog como un modal --- > */}
+      {/* Modal de alerta condicional */}
       {alertDialog.isOpen && (
         <AlertDialog
           title={alertDialog.title}
@@ -170,7 +187,10 @@ export default function Login({ onLogin }) {
         />
       )}
 
+      {/* Contenedor principal con formularios de login y registro */}
       <div className="container" id="container">
+
+        {/* Formulario de inicio de sesión */}
         <div className="form-container sign-in">
           <form onSubmit={handleSignInSubmit}>
             <h1>Iniciar Sesión</h1>
@@ -194,10 +214,12 @@ export default function Login({ onLogin }) {
                 required
               />
             </div>
+            <a href="#">¿Olvidaste tu contraseña?</a>
             <button type="submit">Ingresar</button>
           </form>
         </div>
 
+        {/* Formulario de registro */}
         <div className="form-container sign-up">
           <form onSubmit={handleSignUpSubmit}>
             <h1>Crear Cuenta</h1>
@@ -235,6 +257,7 @@ export default function Login({ onLogin }) {
           </form>
         </div>
 
+        {/* Panel lateral de alternancia entre login y registro */}
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">

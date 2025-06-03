@@ -1,4 +1,4 @@
-// Importamos React, ya que estamos utilizando componentes funcionales
+// Importamos React
 import React from 'react';
 
 // Importamos el archivo CSS que define los estilos para el modal de alerta
