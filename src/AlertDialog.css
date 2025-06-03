@@ -3,8 +3,8 @@
     position: fixed; /* Se fija en la pantalla (no se mueve con el scroll) */
     top: 0; /* Desde la parte superior */
     left: 0; /* Desde el borde izquierdo */
-    width: 100vw; /* Ancho total de la ventana (viewport width) */
-    height: 100vh; /* Alto total de la ventana (viewport height) */
+    width: 100vw; /* Ancho total de la ventana */
+    height: 100vh; /* Alto total de la ventana */
     background-color: rgba(0, 0, 0, 0.5); /* Color negro con transparencia (oscurece el fondo) */
     display: flex; /* Se usa flexbox para centrar el contenido */
     justify-content: center; /* Centra horizontalmente el contenido (el modal) */
@@ -25,7 +25,7 @@
     animation: popIn 0.3s ease-out forwards; /* Aplica la animación definida abajo */
 }
 
-/* Animación para que el modal aparezca con un efecto de "pop in" */
+/* Animación para que el modal aparezca */
 @keyframes popIn {
     from {
         opacity: 0; /* Empieza invisible */
@@ -41,14 +41,14 @@
 .alert-icon {
     font-size: 70px; /* Tamaño grande para el ícono */
     margin-bottom: 20px; /* Espacio debajo del ícono */
-    line-height: 1; /* Evita espacio extra alrededor del ícono */
+    line-height: 1;
     display: inline-flex; /* Flex para alinear ícono */
     justify-content: center; /* Centra el ícono horizontalmente */
     align-items: center; /* Centra el ícono verticalmente */
-    border: 3px solid; /* Borde alrededor del ícono (color dinámico desde JS) */
+    border: 3px solid; /* Borde alrededor del ícono */
     border-radius: 50%; /* Hace el borde completamente circular */
     padding: 10px; /* Espacio interno alrededor del ícono */
-    box-sizing: content-box; /* El padding no afecta el tamaño total */
+    box-sizing: content-box; 
 }
 
 /* Estilo para el título del modal */
@@ -68,7 +68,7 @@
 
 /* Estilo para el botón del modal */
 .alert-dialog button {
-    background-color: #fe9e0d; /* Color naranja (por defecto) */
+    background-color: #fe9e0d; 
     color: #fff; /* Texto blanco */
     font-size: 16px; /* Tamaño del texto */
     padding: 12px 30px; /* Relleno vertical y horizontal */

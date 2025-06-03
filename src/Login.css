@@ -17,7 +17,7 @@
     position: relative;
     overflow: hidden;
     width: 768px; /* Ancho fijo */
-    max-width: 100%; /* No exceder el ancho del viewport */
+    max-width: 100%; 
     min-height: 500px;
     padding: 20px;
 }
