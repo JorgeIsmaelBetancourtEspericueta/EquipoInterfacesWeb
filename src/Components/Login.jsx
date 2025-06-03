@@ -7,7 +7,7 @@ import AlertDialog from './AlertDialog.jsx'; // Componente modal para mostrar me
 
 // Componente principal de Login
 export default function Login({ onLogin }) {
-  const navigate = useNavigate(); // Hook para redireccionar programáticamente
+  const navigate = useNavigate(); // Hook para redireccionar 
 
   // Estados del formulario de inicio de sesión
   const [signInEmail, setSignInEmail] = useState("");
@@ -69,7 +69,7 @@ export default function Login({ onLogin }) {
       registerBtn.removeEventListener("click", handleRegisterClick);
       loginBtn.removeEventListener("click", handleLoginClick);
     };
-  }, [alertDialog]); // alertDialog como dependencia ya que se usa en los callbacks
+  }, [alertDialog]); // alertDialog como dependencia
 
   // Función para mostrar el modal de alerta
   const showAlertDialog = (title, message, type, callback = () => {}) => {
@@ -80,7 +80,7 @@ export default function Login({ onLogin }) {
       type,
       onConfirm: () => {
         setAlertDialog({ ...alertDialog, isOpen: false }); // Cierra el modal
-        callback(); // Ejecuta acción posterior (ej. navegación)
+        callback(); 
       },
     });
   };
@@ -109,7 +109,7 @@ export default function Login({ onLogin }) {
             photo: "",
             career: ""
           }));
-          onLogin(foundUser); // Callback que viene del padre
+          onLogin(foundUser); // Callback
           navigate("/", { state: { user: foundUser } });
           window.location.reload(); // Fuerza recarga para reflejar sesión
         }
@@ -164,7 +164,7 @@ export default function Login({ onLogin }) {
           career: ""
         }));
         onLogin(newUser);
-        navigate("/login", { state: { user: newUser } }); // Puede ser cambiado a "/" si prefieres redirigir al home
+        navigate("/login", { state: { user: newUser } }); 
       }
     );
 
