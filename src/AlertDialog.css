@@ -1,84 +1,90 @@
-/* src/components/AlertDialog.css */
-
+/* Estilo para el fondo oscuro que cubre toda la pantalla cuando el modal está activo */
 .alert-overlay {
-    position: fixed; /* Fija la posición en la ventana de visualización */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Ancho completo de la ventana */
-    height: 100vh; /* Alto completo de la ventana */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
-    display: flex;
+    position: fixed; /* Se fija en la pantalla (no se mueve con el scroll) */
+    top: 0; /* Desde la parte superior */
+    left: 0; /* Desde el borde izquierdo */
+    width: 100vw; /* Ancho total de la ventana (viewport width) */
+    height: 100vh; /* Alto total de la ventana (viewport height) */
+    background-color: rgba(0, 0, 0, 0.5); /* Color negro con transparencia (oscurece el fondo) */
+    display: flex; /* Se usa flexbox para centrar el contenido */
     justify-content: center; /* Centra horizontalmente el contenido (el modal) */
     align-items: center; /* Centra verticalmente el contenido (el modal) */
-    z-index: 2000; /* Asegura que esté por encima de casi todo lo demás */
+    z-index: 2000; /* Se asegura de que esté por encima de otros elementos en la página */
 }
 
+/* Estilo para la caja del diálogo (modal) */
 .alert-dialog {
-    background-color: #fff; /* Fondo blanco para la caja del modal */
-    padding: 30px;
+    background-color: #fff; /* Fondo blanco */
+    padding: 30px; /* Espaciado interno alrededor del contenido */
     border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
-    text-align: center;
-    max-width: 400px;
-    width: 90%; /* Ajuste para pantallas pequeñas */
-    transform: scale(0.95); /* Inicio de animación (ligeramente más pequeño) */
-    animation: popIn 0.3s ease-out forwards; /* Animación de aparición */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto de profundidad */
+    text-align: center; /* Centra el texto dentro del modal */
+    max-width: 400px; /* Ancho máximo de la caja */
+    width: 90%; /* Se adapta a pantallas pequeñas (responsive) */
+    transform: scale(0.95); /* Escala inicial para animación (ligeramente más pequeño) */
+    animation: popIn 0.3s ease-out forwards; /* Aplica la animación definida abajo */
 }
 
+/* Animación para que el modal aparezca con un efecto de "pop in" */
 @keyframes popIn {
     from {
-        opacity: 0;
-        transform: scale(0.8);
+        opacity: 0; /* Empieza invisible */
+        transform: scale(0.8); /* Más pequeño */
     }
     to {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 1; /* Termina totalmente visible */
+        transform: scale(1); /* Tamaño normal */
     }
 }
 
+/* Estilo para el ícono que aparece en la parte superior del modal */
 .alert-icon {
-    font-size: 70px; /* Tamaño del icono */
-    margin-bottom: 20px;
-    line-height: 1;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid; /* Borde alrededor del icono */
-    border-radius: 50%; /* Icono circular */
-    padding: 10px;
-    box-sizing: content-box;
+    font-size: 70px; /* Tamaño grande para el ícono */
+    margin-bottom: 20px; /* Espacio debajo del ícono */
+    line-height: 1; /* Evita espacio extra alrededor del ícono */
+    display: inline-flex; /* Flex para alinear ícono */
+    justify-content: center; /* Centra el ícono horizontalmente */
+    align-items: center; /* Centra el ícono verticalmente */
+    border: 3px solid; /* Borde alrededor del ícono (color dinámico desde JS) */
+    border-radius: 50%; /* Hace el borde completamente circular */
+    padding: 10px; /* Espacio interno alrededor del ícono */
+    box-sizing: content-box; /* El padding no afecta el tamaño total */
 }
 
+/* Estilo para el título del modal */
 .alert-dialog h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 24px; /* Tamaño del texto */
+    margin-bottom: 10px; /* Espacio debajo del título */
+    color: #333; /* Color gris oscuro */
 }
 
+/* Estilo para el mensaje debajo del título */
 .alert-dialog p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 30px;
-    line-height: 1.5;
+    font-size: 16px; /* Tamaño del texto */
+    color: #666; /* Color gris más claro */
+    margin-bottom: 30px; /* Espacio debajo del mensaje */
+    line-height: 1.5; /* Altura de línea para mejor legibilidad */
 }
 
+/* Estilo para el botón del modal */
 .alert-dialog button {
-    background-color: #fe9e0d; /* Tu color naranja principal */
-    color: #fff;
-    font-size: 16px;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #fe9e0d; /* Color naranja (por defecto) */
+    color: #fff; /* Texto blanco */
+    font-size: 16px; /* Tamaño del texto */
+    padding: 12px 30px; /* Relleno vertical y horizontal */
+    border: none; /* Sin bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    font-weight: 600; /* Texto en negrita */
+    cursor: pointer; /* Cursor tipo "mano" al pasar encima */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
 }
 
+/* Cambio de color del botón al pasar el mouse (hover) */
 .alert-dialog button:hover {
-    background-color: #e88b00; /* Tono más oscuro al pasar el ratón */
+    background-color: #e88b00; /* Naranja más oscuro */
 }
 
-/* Colores específicos para el botón del tipo 'info' si quieres que sea azul */
+/* Estilo específico para el botón si es de tipo 'info' (azul) */
 .alert-dialog button[style*="background-color: rgb(33, 150, 243)"]:hover {
-    background-color: #1976D2 !important;
+    background-color: #1976D2 !important; /* Azul más oscuro con !important para sobrescribir */
 }

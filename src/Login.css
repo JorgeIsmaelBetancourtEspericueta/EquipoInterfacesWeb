@@ -1,67 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+/* Importa la fuente 'Montserrat' desde Google Fonts con distintos pesos para usar en la UI */
 
-
+/* Estilo global */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /*font-family: 'Montserrat', sans-serif;*/
-  }
-  
-  
-  .container {
-    background-color: #fff;
-    border-radius: 50px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* font-family: 'Montserrat', sans-serif; */ /* Comentado, se puede habilitar para aplicar fuente */
+}
+
+/* Contenedor general del formulario */
+.container {
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 50px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra suave para elevación */
     position: relative;
     overflow: hidden;
-    width: 768px;
-    max-width: 100%;
+    width: 768px; /* Ancho fijo */
+    max-width: 100%; /* No exceder el ancho del viewport */
     min-height: 500px;
     padding: 20px;
-  }
-  
-  .login-page {
+}
+
+/* Página principal de login */
+.login-page {
     background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #f5e6ca);
+    background: linear-gradient(to right, #e2e2e2, #f5e6ca); /* Degradado de fondo */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    border-radius: 100px; 
-  }
-  
-  .container p {
+    border-radius: 100px;
+}
+
+/* Texto genérico dentro del contenedor */
+.container p {
     font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.3px;
     margin: 20px 0;
     text-align: center;
-  }
-  
-  .container span {
+}
+
+/* Texto tipo span (como avisos o detalles) */
+.container span {
     font-size: 12px;
     color: #666;
-  }
-  
-  
-  .container a {
+}
+
+/* Estilos de enlaces */
+.container a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
     transition: 0.3s ease;
-  }
-  
-  .container a:hover {
-    color: #fe9e0d;
-  }
-  
-  
-  .container button {
-    background-color: #fe9e0d;
+}
+
+.container a:hover {
+    color: #fe9e0d; /* Cambia a naranja al pasar el cursor */
+}
+
+/* Botones generales */
+.container button {
+    background-color: #fe9e0d; /* Naranja principal */
     color: #fff;
     font-size: 13px;
     padding: 12px 50px;
@@ -72,20 +76,21 @@
     margin-top: 15px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-  }
-  
-  .container button:hover {
-    background-color: #e88b00;
-  }
-  
-  .container button.hidden {
+}
+
+.container button:hover {
+    background-color: #e88b00; /* Naranja más oscuro al hacer hover */
+}
+
+/* Botones alternativos ocultos/translúcidos */
+.container button.hidden {
     background-color: transparent;
     border: 2px solid #fff;
     color: #fff;
-  }
-  
-  
-  .container form {
+}
+
+/* Formularios dentro del contenedor */
+.container form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -93,9 +98,10 @@
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
-  }
-  
-  .container input {
+}
+
+/* Inputs del formulario */
+.container input {
     background-color: #f0f0f0;
     border: none;
     margin: 10px 0;
@@ -105,47 +111,50 @@
     width: 100%;
     outline: none;
     transition: 0.3s ease;
-  }
-  
-  .container input:focus {
+}
+
+.container input:focus {
     background-color: #fff;
     border: 1px solid #fe9e0d;
     box-shadow: 0 0 5px rgba(254, 158, 13, 0.5);
-  }
-  
-  
-  .form-container {
+}
+
+/* Contenedor de formularios animados */
+.form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
-  }
-  
-  .sign-in {
+}
+
+/* Formulario de login visible por defecto */
+.sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
-  }
-  
-  .container.active .sign-in {
-    transform: translateX(100%);
-  }
-  
-  .sign-up {
+}
+
+.container.active .sign-in {
+    transform: translateX(100%); /* Lo empuja fuera de la vista cuando se activa el modo 'sign-up' */
+}
+
+/* Formulario de registro oculto inicialmente */
+.sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
-  }
-  
-  .container.active .sign-up {
+}
+
+.container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
     animation: move 0.6s;
-  }
-  
-  @keyframes move {
+}
+
+/* Animación para mostrar el sign-up */
+@keyframes move {
     0%, 49.99% {
         opacity: 0;
         z-index: 1;
@@ -154,14 +163,14 @@
         opacity: 1;
         z-index: 5;
     }
-  }
-  
-  
-  .social-icons {
+}
+
+/* Iconos sociales */
+.social-icons {
     margin: 20px 0;
-  }
-  
-  .social-icons a {
+}
+
+.social-icons a {
     border: 1px solid #ccc;
     border-radius: 50%;
     display: inline-flex;
@@ -171,16 +180,16 @@
     width: 42px;
     height: 42px;
     transition: 0.3s ease;
-  }
-  
-  .social-icons a:hover {
+}
+
+.social-icons a:hover {
     background-color: #fe9e0d;
     border-color: #fe9e0d;
     color: #fff;
-  }
-  
-  
-  .toggle-container {
+}
+
+/* Contenedor del panel de alternancia entre login/register */
+.toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -188,15 +197,17 @@
     height: 100%;
     overflow: hidden;
     transition: all 0.6s ease-in-out;
-    border-radius: 300px 0 0 300px; 
+    border-radius: 300px 0 0 300px;
     z-index: 1000;
-  }
-  
-  .container.active .toggle-container {
+}
+
+.container.active .toggle-container {
     transform: translateX(-100%);
-    border-radius: 0 300px 300px 0; 
-  }
-  .toggle {
+    border-radius: 0 300px 300px 0;
+}
+
+/* Panel animado naranja para alternar entre formularios */
+.toggle {
     background-color: #fe9e0d;
     height: 100%;
     width: 200%;
@@ -207,13 +218,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .container.active .toggle {
+}
+
+.container.active .toggle {
     transform: translateX(50%);
-  }
-  
-  .toggle-panel {
+}
+
+/* Panel dentro del toggle para texto/botones */
+.toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -226,27 +238,29 @@
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-  }
-  
-  .toggle-left {
+}
+
+/* Panel izquierdo (usado en modo sign-in) */
+.toggle-left {
     transform: translateX(-50%);
-  }
-  
-  .container.active .toggle-left {
+}
+
+.container.active .toggle-left {
     transform: translateX(50);
-  }
-  
-  .toggle-right {
+}
+
+/* Panel derecho (usado en modo sign-up) */
+.toggle-right {
     right: 0;
     transform: translateX(0);
-  }
-  
-  .container.active .toggle-right {
+}
+
+.container.active .toggle-right {
     transform: translateX(200%);
-  }
-  
-  
-  .input-container {
+}
+
+/* Estilo para campos con íconos integrados */
+.input-container {
     position: relative;
     width: 100%;
     display: flex;
@@ -256,16 +270,16 @@
     padding: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-  }
-  
-  .input-container .icon {
+}
+
+.input-container .icon {
     font-size: 18px;
     color: #fe9e0d;
     margin-right: 12px;
-  }
-  
-  
-  .input-container input {
+}
+
+/* Estilo del input dentro del input-container */
+.input-container input {
     width: 100%;
     border: none;
     outline: none;
@@ -273,11 +287,10 @@
     background: #fff;
     padding: 10px;
     border-radius: 8px;
-  }
-  
-  
-  .input-container input:focus {
+}
+
+/* Efecto al enfocar input con icono */
+.input-container input:focus {
     border: 1px solid #fe9e0d;
     box-shadow: 0 0 5px rgba(254, 158, 13, 0.3);
-  }
-  
+}
