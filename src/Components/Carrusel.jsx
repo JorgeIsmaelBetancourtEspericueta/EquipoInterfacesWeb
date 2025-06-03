@@ -1,5 +1,6 @@
+// Importación de hooks y dependencias necesarias para el componente
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Importamos useParams
+import { useParams } from "react-router-dom"; // Para obtener el parámetro "id" desde la URL
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -7,20 +8,20 @@ import "../Style/CarouselStyles.css";
 import bandera from "../Assets/ubicacion.png";
 
 function Carrusel() {
-  const { id } = useParams(); // Obtenemos el parámetro 'id' de la URL
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [rating, setRating] = useState(5);
-  const [lugares, setLugares] = useState([]);
-  const [lugarActual, setLugarActual] = useState(null);
-  // Nuevo estado para el índice de imagen activa dentro del lugar actual
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const { id } = useParams(); // Extrae el ID del lugar desde la URL
+  const [activeIndex, setActiveIndex] = useState(0); // Índice del lugar actual
+  const [comments, setComments] = useState([]); // Lista de comentarios del usuario
+  const [newComment, setNewComment] = useState(""); // Comentario nuevo a agregar
+  const [rating, setRating] = useState(5); // Calificación que se da al lugar
+  const [lugares, setLugares] = useState([]); // Lista completa de lugares desde la API
+  const [lugarActual, setLugarActual] = useState(null); // Detalles del lugar actualmente mostrado
+  const [activeImageIndex, setActiveImageIndex] = useState(0); // Imagen activa dentro del carrusel del lugar
 
+  // Al montar o cuando cambia el ID, se hace la petición para obtener todos los lugares
   useEffect(() => {
     const fetchLugares = async () => {
       try {
-        const res = await fetch("https://api-lugares-ygbm.onrender.com", {
+        const res = await fetch("https://api-lugares-ygbm.onrender.com/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -40,6 +41,7 @@ function Carrusel() {
             `,
           }),
         });
+
         const json = await res.json();
         const lugaresFromApi = (json.data?.getLugares || [])
           .filter(Boolean)
@@ -53,8 +55,10 @@ function Carrusel() {
             phone: lugar.phone,
             hours: lugar.hours,
           }));
+
         setLugares(lugaresFromApi);
 
+        // Si hay un ID en la URL, se muestra ese lugar; si no, se muestra el primero
         if (id) {
           const index = lugaresFromApi.findIndex((l) => l.id === id);
           if (index !== -1) {
@@ -74,6 +78,7 @@ function Carrusel() {
     fetchLugares();
   }, [id]);
 
+  // Función para añadir un nuevo comentario con calificación
   const handleAddComment = () => {
     if (newComment.trim() !== "") {
       setComments([...comments, { text: newComment, rating }]);
@@ -82,24 +87,27 @@ function Carrusel() {
     }
   };
 
+  // Cuando se cambia de lugar manualmente
   const handleSlideChange = (index) => {
     setActiveIndex(index);
     setLugarActual(lugares[index]);
-    setComments([]); // Limpia los comentarios si cambias de lugar
-    setActiveImageIndex(0); // Reinicia la imagen activa al cambiar de lugar
+    setComments([]);
+    setActiveImageIndex(0);
   };
 
+  // Mostrar mensaje de carga mientras se obtiene el lugar
   if (!lugarActual)
     return <div className="text-center mt-5">Cargando lugar...</div>;
 
   return (
     <div className="container mt-4">
-      {/* Carrusel */}
+      {/* Carrusel de imágenes del lugar actual */}
       <div
         id="carouselExampleIndicators"
         className="carousel slide"
         data-bs-ride="carousel"
       >
+        {/* Indicadores (puntos) del carrusel */}
         <div className="carousel-indicators">
           {lugarActual.images.map((_, index) => (
             <button
@@ -112,6 +120,8 @@ function Carrusel() {
             ></button>
           ))}
         </div>
+
+        {/* Imágenes dentro del carrusel */}
         <div className="carousel-inner">
           {lugarActual.images.map((img, index) => (
             <div
@@ -129,14 +139,15 @@ function Carrusel() {
           ))}
         </div>
 
+        {/* Controles de navegación del carrusel */}
         <button
           className="carousel-control-prev"
-          onClick={() => {
-            const newIndex =
+          onClick={() =>
+            setActiveImageIndex(
               (activeImageIndex - 1 + lugarActual.images.length) %
-              lugarActual.images.length;
-            setActiveImageIndex(newIndex);
-          }}
+                lugarActual.images.length
+            )
+          }
         >
           <span
             className="carousel-control-prev-icon"
@@ -146,10 +157,11 @@ function Carrusel() {
         </button>
         <button
           className="carousel-control-next"
-          onClick={() => {
-            const newIndex = (activeImageIndex + 1) % lugarActual.images.length;
-            setActiveImageIndex(newIndex);
-          }}
+          onClick={() =>
+            setActiveImageIndex(
+              (activeImageIndex + 1) % lugarActual.images.length
+            )
+          }
         >
           <span
             className="carousel-control-next-icon"
@@ -159,10 +171,10 @@ function Carrusel() {
         </button>
       </div>
 
-      {/* Contenedor inferior */}
+      {/* Información del lugar y sección de comentarios */}
       <div className="content-container mt-4 p-4">
         <div className="row">
-          {/* Descripción */}
+          {/* Sección de descripción del lugar */}
           <div className="col-md-6 description text-start">
             <div className="image-container mb-3">
               <img
@@ -219,7 +231,7 @@ function Carrusel() {
             </div>
           </div>
 
-          {/* Comentarios */}
+          {/* Sección de comentarios y formulario para añadir uno nuevo */}
           <div className="col-md-6 comments text-start">
             <h3>Comentarios</h3>
             <ul className="list-group">
@@ -229,6 +241,7 @@ function Carrusel() {
                 comments.map((c, index) => (
                   <li key={index} className="list-group-item comment-item">
                     <div className="d-flex align-items-center">
+                      {/* Estrellas según calificación */}
                       <div className="stars-container d-flex me-2">
                         {[...Array(5)].map((_, i) => (
                           <img
@@ -259,6 +272,7 @@ function Carrusel() {
               )}
             </ul>
 
+            {/* Formulario para añadir comentario */}
             <div className="mt-3">
               <input
                 type="text"
