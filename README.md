@@ -11,8 +11,13 @@ Equipo de Desarrollo
 Este proyecto fue desarrollado por el equipo de estudiantes:
 
 21400655 - Betancourt Espericueta Jorge Ismael
+
+21400654 - Betancourt Espericueta Jesús Ismael
+
 21400770 - Ruiz Guitron Carlos Alberto
+
 21400736 - Natividad Aguilera Andrick Joksan
+
 21400766 - Rodríguez Sánchez Juan Alejandro
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________
 
